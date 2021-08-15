@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <!--
+    Project which has the purpose of setting up the infrastructure you would need to run the service successfully.
+    Aka: DI configuration, Infrastructure bits etc.
+    -->
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>HistoryAccessorHost</RootNamespace>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+        <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\History.Accessor.Contracts\History.Accessor.Contracts.csproj" />
+      <ProjectReference Include="..\History.Accessor.Service\History.Accessor.Service.csproj" />
+    </ItemGroup>
+    
+</Project>

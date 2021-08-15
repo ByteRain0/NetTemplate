@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>CloudOrchestra</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="8.6.2" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="8.6.2" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0-preview.6.21352.12" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
+
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
+        <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="5.0.1" />
+        
+        <!--Packages required to run migrations from cmd.-->
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\AzureKeyVault\AzureKeyVault.csproj" />
+      <ProjectReference Include="..\History.Accessor.Contracts\History.Accessor.Contracts.csproj" />
+      <ProjectReference Include="..\History.Accessor.Host\History.Accessor.Host.csproj" />
+      <ProjectReference Include="..\PoC.Searching.Engine\PoC.Searching.Engine.csproj" />
+      <ProjectReference Include="..\Manager.Service\Manager.Service.csproj" />
+      <ProjectReference Include="..\ExecutionPipeline\ExecutionPipeline.csproj" />
+    </ItemGroup>
+
+</Project>

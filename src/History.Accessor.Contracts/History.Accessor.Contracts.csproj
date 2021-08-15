@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <!--Specific contracts needed for clients to use the history RA-->
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>HistoryAccessor</RootNamespace>
+    </PropertyGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\ExecutionPipeline\ExecutionPipeline.csproj" />
+    </ItemGroup>
+    
+</Project>

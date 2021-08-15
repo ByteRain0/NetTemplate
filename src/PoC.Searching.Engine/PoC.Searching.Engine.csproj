@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>Instruments.Searching.Engine.Contracts</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ExecutionPipeline\ExecutionPipeline.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Service\Infrastructure" />
+    </ItemGroup>
+
+</Project>
