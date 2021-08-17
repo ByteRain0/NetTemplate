@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace HistoryAccessor.Contracts
+namespace History.Accessor.Contracts.Contracts
 {
     public class EventOverviewDto
     {

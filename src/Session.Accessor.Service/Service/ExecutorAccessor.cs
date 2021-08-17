@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Http;
-using SessionAccessor.Contracts;
+using Session.Accessor.Service.Contracts;
 
-namespace SessionAccessor.Service
+namespace Session.Accessor.Service.Service
 {
     /// <summary>
     /// TODO: leave this service as an Interface programming model example.

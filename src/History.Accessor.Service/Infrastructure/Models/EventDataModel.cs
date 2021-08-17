@@ -1,6 +1,6 @@
 using System;
 
-namespace HistoryAccessorService.Infrastructure.Models
+namespace History.Accessor.Service.Infrastructure.Models
 {
     public class EventDataModel
     {

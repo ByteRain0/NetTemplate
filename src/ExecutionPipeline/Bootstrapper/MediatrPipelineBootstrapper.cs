@@ -1,11 +1,11 @@
+using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
+using ExecutionPipeline.MediatRPipeline.Loggers;
+using ExecutionPipeline.MediatRPipeline.Retry;
+using ExecutionPipeline.MediatRPipeline.Validator;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Utilities.MediatRPipeline.ExceptionHandling;
-using Utilities.MediatRPipeline.Loggers;
-using Utilities.MediatRPipeline.Retry;
-using Utilities.MediatRPipeline.Validator;
 
-namespace Utilities.Bootstrapper
+namespace ExecutionPipeline.Bootstrapper
 {
     public static class MediatrPipelineBootstrapper
     {

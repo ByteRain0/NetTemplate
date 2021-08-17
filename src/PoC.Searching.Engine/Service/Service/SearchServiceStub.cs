@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Instruments.Searching.Engine.Contracts.Contracts.Contracts;
-using Instruments.Searching.Engine.Contracts.Contracts.ServiceLevelContracts;
-using Instruments.Searching.Engine.Contracts.Service.Service.Queries;
+using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using MediatR;
-using Utilities.MediatRPipeline.ExceptionHandling;
+using PoC.Searching.Engine.Contracts.Contracts;
+using PoC.Searching.Engine.Contracts.ServiceLevelContracts;
+using PoC.Searching.Engine.Service.Service.Queries;
 
-namespace Instruments.Searching.Engine.Contracts.Service.Service
+namespace PoC.Searching.Engine.Service.Service
 {
     /// <summary>
     /// Our case this is going to be a stub.

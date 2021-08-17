@@ -1,10 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using SessionAccessor.Contracts;
-using SessionAccessor.Host.HealthChecks;
-using SessionAccessor.Service.Infrastructure;
+using Session.Accessor.Service.Contracts;
+using Session.Accessor.Service.Host.HealthChecks;
+using Session.Accessor.Service.Service.Infrastructure;
 
-namespace SessionAccessor.Host.Bootstrappers
+namespace Session.Accessor.Service.Host.Bootstrappers
 {
     public static class ExecutorAccessorBootstrapper
     {

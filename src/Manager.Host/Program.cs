@@ -1,8 +1,8 @@
-using AzureKeyVaultAccessorContracts.Host.Bootstrapper;
+using AzureKeyVault.Host.Bootstrapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace CloudOrchestra
+namespace Manager.Host
 {
     public class Program
     {
@@ -14,7 +14,7 @@ namespace CloudOrchestra
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+            Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(args)
                 .ConfigureHostForKeyVault()
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }

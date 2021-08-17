@@ -1,6 +1,4 @@
-using System;
-
-namespace Utilities.MediatRPipeline.Authorization
+namespace ExecutionPipeline.MediatRPipeline.Authorization
 {
     public interface IAuthorizationOf<T>
     {

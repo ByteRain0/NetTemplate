@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace CloudOrchestra.Bootstrappers
+namespace Manager.Host.Bootstrappers
 {
     public static class SwaggerBootstrapper
     {

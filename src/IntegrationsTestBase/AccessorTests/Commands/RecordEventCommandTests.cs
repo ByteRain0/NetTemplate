@@ -1,13 +1,12 @@
 using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
-using HistoryAccessor.Contracts;
-using HistoryAccessorService.Service.Commands.RecordEvent;
-using IntegrationTestsBase.Infrastructure;
+using History.Accessor.Service.Service.Commands.RecordEvent;
+using History.Accessor.Tests.Infrastructure;
 using MediatR;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace IntegrationTestsBase.AccessorTests.Commands
+namespace History.Accessor.Tests.AccessorTests.Commands
 {
     [TestClass]
     public class RecordEventCommandTests : TestBase

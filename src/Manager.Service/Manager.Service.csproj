@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <RootNamespace>Orchestra.Manager</RootNamespace>
+        <RootNamespace>Manager.Service</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,6 +13,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\History.Accessor.Contracts\History.Accessor.Contracts.csproj" />
+        <ProjectReference Include="..\MessageDispatchingEngine.Service\MessageDispatchingEngine.Service.csproj" />
         <ProjectReference Include="..\Session.Accessor.Service\Session.Accessor.Service.csproj" />
         <ProjectReference Include="..\ExecutionPipeline\ExecutionPipeline.csproj" />
     </ItemGroup>

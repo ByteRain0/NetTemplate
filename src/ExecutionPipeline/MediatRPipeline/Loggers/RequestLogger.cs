@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
 
-namespace Utilities.MediatRPipeline.Loggers
+namespace ExecutionPipeline.MediatRPipeline.Loggers
 {
     public class RequestLogger<TRequest> : IRequestPreProcessor<TRequest>
     {

@@ -1,9 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using HistoryAccessor.Contracts;
-using Utilities.MediatRPipeline.ExceptionHandling;
+using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
+using History.Accessor.Contracts.Contracts;
 
-namespace HistoryAccessor.ServiceLevelContracts
+namespace History.Accessor.Contracts.ServiceLevelContracts
 {
     /// <summary>
     /// Service methods are all async.

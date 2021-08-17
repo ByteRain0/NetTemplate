@@ -1,11 +1,11 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using MediatR;
-using Utilities.MediatRPipeline.ExceptionHandling;
 using Voyager.Api;
 
-namespace Orchestra.Manager.Service.PoC.Queries
+namespace Manager.Service.Service.PoC.Queries
 {
     [VoyagerRoute(HttpMethod.Post, "api/GetPropertyFromRoute/{property}")]
     public class FromRouteExample : IRequest<Response>

@@ -1,7 +1,7 @@
 using AutoMapper;
-using HistoryAccessor.Contracts;
+using History.Accessor.Contracts.Contracts;
 
-namespace HistoryAccessorService.Service.Commands.RecordEvent
+namespace History.Accessor.Service.Service.Commands.RecordEvent
 {
     public class RecordEventEventDtoProfile : Profile
     {

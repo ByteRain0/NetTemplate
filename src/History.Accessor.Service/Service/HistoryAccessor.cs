@@ -1,15 +1,15 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using HistoryAccessor.Contracts;
-using HistoryAccessor.ServiceLevelContracts;
-using HistoryAccessorService.Service.Commands.RecordEvent;
-using HistoryAccessorService.Service.Queries.CountEvents;
-using HistoryAccessorService.Service.Queries.GetEventsQuery;
+using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
+using History.Accessor.Contracts.Contracts;
+using History.Accessor.Contracts.ServiceLevelContracts;
+using History.Accessor.Service.Service.Commands.RecordEvent;
+using History.Accessor.Service.Service.Queries.CountEvents;
+using History.Accessor.Service.Service.Queries.GetEventsQuery;
 using MediatR;
-using Utilities.MediatRPipeline.ExceptionHandling;
 
-namespace HistoryAccessorService.Service
+namespace History.Accessor.Service.Service
 {
     public class HistoryAccessor : IHistoryAccessor
     {

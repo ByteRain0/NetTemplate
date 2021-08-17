@@ -1,12 +1,12 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
-using HistoryAccessor.Contracts;
-using HistoryAccessorService.Infrastructure.Models;
+using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
+using History.Accessor.Contracts.Contracts;
+using History.Accessor.Service.Infrastructure.Models;
 using MediatR;
-using Utilities.MediatRPipeline.ExceptionHandling;
 
-namespace HistoryAccessorService.Service.Queries.GetEventsQuery
+namespace History.Accessor.Service.Service.Queries.GetEventsQuery
 {
     public class GetEventsQuery : EventOverviewFilter, IRequest<Response<EventOverviewDto>>
     {

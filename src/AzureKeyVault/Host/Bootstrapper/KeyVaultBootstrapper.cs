@@ -1,8 +1,8 @@
-using AzureKeyVaultAccessorContracts.Service;
+using AzureKeyVault.Service;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
-namespace AzureKeyVaultAccessorContracts.Host.Bootstrapper
+namespace AzureKeyVault.Host.Bootstrapper
 {
     public static class KeyVaultBootstrapper
     {

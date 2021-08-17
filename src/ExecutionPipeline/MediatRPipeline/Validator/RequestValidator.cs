@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
 
-namespace Utilities.MediatRPipeline.Validator
+namespace ExecutionPipeline.MediatRPipeline.Validator
 {
     public class RequestValidator<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>

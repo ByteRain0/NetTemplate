@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Globalization;
 using AutoMapper;
-using HistoryAccessorHost.Bootstrappers;
-using HistoryAccessorService.Infrastructure.DatabaseContext;
+using ExecutionPipeline.Bootstrapper;
+using History.Accessor.Host.Bootstrappers;
+using History.Accessor.Service.Infrastructure.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Utilities.Bootstrapper;
 
-namespace IntegrationTestsBase.Infrastructure
+namespace History.Accessor.Tests.Infrastructure
 {
     public class TestBase
     {

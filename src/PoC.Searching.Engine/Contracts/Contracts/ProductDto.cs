@@ -1,4 +1,4 @@
-namespace Instruments.Searching.Engine.Contracts.Contracts.Contracts
+namespace PoC.Searching.Engine.Contracts.Contracts
 {
     public class ProductDto
     {

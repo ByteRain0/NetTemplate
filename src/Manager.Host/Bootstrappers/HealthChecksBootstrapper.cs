@@ -2,7 +2,7 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
-namespace CloudOrchestra.Bootstrappers
+namespace Manager.Host.Bootstrappers
 {
     public static class HealthChecksBootstrapper
     {

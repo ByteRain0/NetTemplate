@@ -1,8 +1,8 @@
+using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
+using ExecutionPipeline.MediatRPipeline.Retry;
 using MediatR;
-using Utilities.MediatRPipeline.ExceptionHandling;
-using Utilities.MediatRPipeline.Retry;
 
-namespace HistoryAccessorService.Service.Queries.CountEvents
+namespace History.Accessor.Service.Service.Queries.CountEvents
 {
     public class CountAuditEntries : IRequest<Response<int>>, IRetryMarker
     {

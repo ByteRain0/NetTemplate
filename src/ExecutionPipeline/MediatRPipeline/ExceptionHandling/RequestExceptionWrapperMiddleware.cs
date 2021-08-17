@@ -7,7 +7,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Utilities.MediatRPipeline.ExceptionHandling
+namespace ExecutionPipeline.MediatRPipeline.ExceptionHandling
 {
     public class RequestExceptionWrapperMiddleware<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {

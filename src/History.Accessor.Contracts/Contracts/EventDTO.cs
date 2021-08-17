@@ -1,6 +1,6 @@
 using System;
 
-namespace HistoryAccessor.Contracts
+namespace History.Accessor.Contracts.Contracts
 {
     public class EventDto
     {

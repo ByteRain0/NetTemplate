@@ -1,13 +1,13 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using HistoryAccessor.Contracts;
-using HistoryAccessorService.Infrastructure.DatabaseContext;
+using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
+using History.Accessor.Contracts.Contracts;
+using History.Accessor.Service.Infrastructure.DatabaseContext;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Utilities.MediatRPipeline.ExceptionHandling;
 
-namespace HistoryAccessorService.Service.Queries.GetEventsQuery
+namespace History.Accessor.Service.Service.Queries.GetEventsQuery
 {
     internal class GetEventsQueryHandler : IRequestHandler<GetEventsQuery, Response<EventOverviewDto>>
     {
