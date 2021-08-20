@@ -3,7 +3,7 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net5.0</TargetFramework>
-        <RootNamespace>Message.Dispatching.Engine.Worker</RootNamespace>
+        <RootNamespace>MessageDispatcher.Worker</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -23,8 +23,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\History.Accessor.Host\History.Accessor.Host.csproj" />
-      <ProjectReference Include="..\MessageDispatchingEngine.Contracts\MessageDispatchingEngine.Contracts.csproj" />
-      <ProjectReference Include="..\MessageDispatchingEngine.Service\MessageDispatchingEngine.Service.csproj" />
+      <ProjectReference Include="..\Manager.Service\Manager.Service.csproj" />
+      <ProjectReference Include="..\MessageDispater.Contracts\MessageDispater.Contracts.csproj" />
+      <ProjectReference Include="..\MessageDispatcher\MessageDispatcher.csproj" />
+      <ProjectReference Include="..\PoC.Searching.Engine\PoC.Searching.Engine.csproj" />
     </ItemGroup>
 
 </Project>

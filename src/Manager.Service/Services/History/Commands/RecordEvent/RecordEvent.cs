@@ -3,7 +3,7 @@ using ExecutionPipeline.MediatRPipeline.Retry;
 using MediatR;
 using Voyager.Api;
 
-namespace Manager.Service.Service.History.Commands.RecordEvent
+namespace Manager.Service.Services.History.Commands.RecordEvent
 {
     [VoyagerRoute(HttpMethod.Post,"api/recordEvent")]
     public class RecordEvent : IRequest<Response>, IRetryMarker

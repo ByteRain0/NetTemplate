@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace MessageDispatchingEngine.Contracts
+namespace MessageDispatcher.Contracts
 {
     public static class MediatrQueueExtension
     {

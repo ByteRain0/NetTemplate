@@ -2,12 +2,12 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
-using Manager.Service.Service.History.Commands.RecordEvent;
+using Manager.Service.Services.History.Commands.RecordEvent;
 using MediatR;
-using MessageDispatchingEngine.Contracts;
+using MessageDispatcher.Contracts;
 using Voyager.Api;
 
-namespace Manager.Service.Service.PoC.OutOfProcess
+namespace Manager.Service.Services.PoC.OutOfProcess
 {
     [VoyagerRoute(HttpMethod.Post, "api/Dispatch")]
     public class OutOfProcessTrigger : IRequest<Response>

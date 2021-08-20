@@ -1,12 +1,12 @@
 using Hangfire;
 using Hangfire.PostgreSql;
-using MessageDispatchingEngine.Contracts;
-using MessageDispatchingEngine.Service.Infrastructure;
+using MessageDispatcher.Contracts;
+using MessageDispatcher.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MessageDispatchingEngine.Service.Host.Bootstrapper
+namespace MessageDispatcher.Host.Bootstrapper
 {
     public static class HangFireMessageDispatcherBootstrapper
     {

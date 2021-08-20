@@ -5,7 +5,7 @@ using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using MediatR;
 using Voyager.Api;
 
-namespace Manager.Service.Service.PoC.Queries
+namespace Manager.Service.Services.PoC.Queries
 {
     [VoyagerRoute(HttpMethod.Post, "api/GetPropertyFromRoute/{property}")]
     public class FromRouteExample : IRequest<Response>

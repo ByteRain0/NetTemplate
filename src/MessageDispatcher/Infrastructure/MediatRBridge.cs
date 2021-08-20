@@ -2,7 +2,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace MessageDispatchingEngine.Service.Infrastructure
+namespace MessageDispatcher.Infrastructure
 {
     public class MediatRBridge
     {

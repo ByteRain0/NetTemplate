@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using MediatR;
 
-namespace MessageDispatchingEngine.Contracts
+namespace MessageDispatcher.Contracts
 {
     public interface IMessageDispatcher
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using AutoMapper;
-using Manager.Service.Service.History.Commands.RecordEvent;
+using Manager.Service.Services.History.Commands.RecordEvent;
 using Microsoft.Extensions.DependencyInjection;
 using Voyager;
 

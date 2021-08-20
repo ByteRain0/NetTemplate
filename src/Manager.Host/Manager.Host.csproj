@@ -26,6 +26,7 @@
       <ProjectReference Include="..\AzureKeyVault\AzureKeyVault.csproj" />
       <ProjectReference Include="..\History.Accessor.Contracts\History.Accessor.Contracts.csproj" />
       <ProjectReference Include="..\History.Accessor.Host\History.Accessor.Host.csproj" />
+      <ProjectReference Include="..\MessageDispatcher\MessageDispatcher.csproj" />
       <ProjectReference Include="..\PoC.Searching.Engine\PoC.Searching.Engine.csproj" />
       <ProjectReference Include="..\Manager.Service\Manager.Service.csproj" />
       <ProjectReference Include="..\ExecutionPipeline\ExecutionPipeline.csproj" />

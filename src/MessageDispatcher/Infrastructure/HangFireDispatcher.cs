@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using Hangfire;
 using MediatR;
-using MessageDispatchingEngine.Contracts;
+using MessageDispatcher.Contracts;
 
-namespace MessageDispatchingEngine.Service.Infrastructure
+namespace MessageDispatcher.Infrastructure
 {
     public class HangFireDispatcher : IMessageDispatcher
     {

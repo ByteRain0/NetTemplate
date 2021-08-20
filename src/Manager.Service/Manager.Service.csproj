@@ -13,7 +13,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\History.Accessor.Contracts\History.Accessor.Contracts.csproj" />
-        <ProjectReference Include="..\MessageDispatchingEngine.Service\MessageDispatchingEngine.Service.csproj" />
+        <ProjectReference Include="..\MessageDispater.Contracts\MessageDispater.Contracts.csproj" />
         <ProjectReference Include="..\Session.Accessor.Service\Session.Accessor.Service.csproj" />
         <ProjectReference Include="..\ExecutionPipeline\ExecutionPipeline.csproj" />
     </ItemGroup>

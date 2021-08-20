@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <RootNamespace>Message.Dispatching.Engine.Contracts</RootNamespace>
+        <RootNamespace>MessageDispatcher.Contracts</RootNamespace>
     </PropertyGroup>
 
 

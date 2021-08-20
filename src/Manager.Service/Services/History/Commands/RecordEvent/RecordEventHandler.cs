@@ -9,7 +9,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Voyager;
 
-namespace Manager.Service.Service.History.Commands.RecordEvent
+namespace Manager.Service.Services.History.Commands.RecordEvent
 {
     internal class RecordEventHandler : IRequestHandler<RecordEvent, Response>, IInjectHttpContext
     {

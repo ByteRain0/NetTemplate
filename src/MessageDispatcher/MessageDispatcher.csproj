@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <RootNamespace>Message.Dispatching.Engine.Service</RootNamespace>
+        <RootNamespace>MessageDispatcher</RootNamespace>
     </PropertyGroup>
 
 
@@ -20,7 +20,7 @@
     
     <ItemGroup>
       <ProjectReference Include="..\ExecutionPipeline\ExecutionPipeline.csproj" />
-      <ProjectReference Include="..\MessageDispatchingEngine.Contracts\MessageDispatchingEngine.Contracts.csproj" />
+      <ProjectReference Include="..\MessageDispater.Contracts\MessageDispater.Contracts.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 using Hangfire;
 using Newtonsoft.Json;
 
-namespace MessageDispatchingEngine.Service.Infrastructure
+namespace MessageDispatcher.Infrastructure
 {
     public static class HangFireConfigurationExtensions
     {

@@ -2,7 +2,7 @@ using ExecutionPipeline.Bootstrapper;
 using History.Accessor.Host.Bootstrappers;
 using Manager.Host.Bootstrappers;
 using Manager.Service.Bootstrappers;
-using MessageDispatchingEngine.Service.Host.Bootstrapper;
+using MessageDispatcher.Host.Bootstrapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
