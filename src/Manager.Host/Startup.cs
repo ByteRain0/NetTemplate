@@ -1,16 +1,18 @@
-using CloudOrchestra.Bootstrappers;
-using HistoryAccessorHost.Bootstrappers;
-using Instruments.Searching.Engine.Contracts.Host.Bootstrappers;
+using ExecutionPipeline.Bootstrapper;
+using History.Accessor.Host.Bootstrappers;
+using Manager.Host.Bootstrappers;
+using Manager.Service.Bootstrappers;
+using MessageDispatcher.Host.Bootstrapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SessionAccessor.Host.Bootstrappers;
-using Utilities.Bootstrapper;
+using PoC.Searching.Engine.Host.Bootstrappers;
+using Session.Accessor.Service.Host.Bootstrappers;
 using Voyager;
 
-namespace CloudOrchestra
+namespace Manager.Host
 {
     public class Startup
     {
@@ -29,6 +31,7 @@ namespace CloudOrchestra
             services.ConfigureManagerServices();
             services.ConfigureSearchingEngine();
             services.ConfigureSessionAccessors();
+            services.ConfigureMessageDispatcher(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -47,6 +50,8 @@ namespace CloudOrchestra
 
             app.UseAuthorization();
 
+            app.ConfigureMessageDispatcher();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapVoyager();

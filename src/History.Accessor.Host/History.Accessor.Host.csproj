@@ -6,7 +6,7 @@
     -->
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <RootNamespace>HistoryAccessorHost</RootNamespace>
+        <RootNamespace>History.Accessor.Host</RootNamespace>
     </PropertyGroup>
     
     <ItemGroup>

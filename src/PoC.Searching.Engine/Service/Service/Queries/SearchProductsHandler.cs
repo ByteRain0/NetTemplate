@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Instruments.Searching.Engine.Contracts.Contracts.Contracts;
+using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using MediatR;
-using Utilities.MediatRPipeline.ExceptionHandling;
+using PoC.Searching.Engine.Contracts.Contracts;
 
-namespace Instruments.Searching.Engine.Contracts.Service.Service.Queries
+namespace PoC.Searching.Engine.Service.Service.Queries
 {
     public class SearchProductsHandler : IRequestHandler<SearchProducts, Response<IList<ProductDto>>>
     {

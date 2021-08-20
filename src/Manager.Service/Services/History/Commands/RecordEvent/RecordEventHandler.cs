@@ -2,14 +2,14 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using HistoryAccessor.Contracts;
-using HistoryAccessor.ServiceLevelContracts;
+using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
+using History.Accessor.Contracts.Contracts;
+using History.Accessor.Contracts.ServiceLevelContracts;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using Utilities.MediatRPipeline.ExceptionHandling;
 using Voyager;
 
-namespace Orchestra.Manager.Service.History.Commands.RecordEvent
+namespace Manager.Service.Services.History.Commands.RecordEvent
 {
     internal class RecordEventHandler : IRequestHandler<RecordEvent, Response>, IInjectHttpContext
     {

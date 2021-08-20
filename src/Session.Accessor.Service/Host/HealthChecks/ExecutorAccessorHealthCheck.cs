@@ -1,9 +1,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using SessionAccessor.Contracts;
+using Session.Accessor.Service.Contracts;
 
-namespace SessionAccessor.Host.HealthChecks
+namespace Session.Accessor.Service.Host.HealthChecks
 {
     public class ExecutorAccessorHealthCheck : IHealthCheck
     {

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Instruments.Searching.Engine.Contracts.Contracts.Contracts;
-using Utilities.MediatRPipeline.ExceptionHandling;
+using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
+using PoC.Searching.Engine.Contracts.Contracts;
 
-namespace Instruments.Searching.Engine.Contracts.Contracts.ServiceLevelContracts
+namespace PoC.Searching.Engine.Contracts.ServiceLevelContracts
 {
     public interface ISearchEngine
     {

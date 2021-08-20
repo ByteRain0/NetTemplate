@@ -2,7 +2,7 @@ using Microsoft.Azure.KeyVault.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.AzureKeyVault;
 
-namespace AzureKeyVaultAccessorContracts.Service
+namespace AzureKeyVault.Service
 {
     public class PrefixKeyVaultSecretManager : IKeyVaultSecretManager
     {

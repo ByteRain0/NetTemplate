@@ -1,9 +1,9 @@
-using Instruments.Searching.Engine.Contracts.Contracts.ServiceLevelContracts;
-using Instruments.Searching.Engine.Contracts.Service.Service;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using PoC.Searching.Engine.Contracts.ServiceLevelContracts;
+using PoC.Searching.Engine.Service.Service;
 
-namespace Instruments.Searching.Engine.Contracts.Host.Bootstrappers
+namespace PoC.Searching.Engine.Host.Bootstrappers
 {
     public static class EngineBootstrapper
     {

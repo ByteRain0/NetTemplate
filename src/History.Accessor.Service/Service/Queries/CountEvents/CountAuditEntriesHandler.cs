@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
-using HistoryAccessorService.Infrastructure.DatabaseContext;
+using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
+using History.Accessor.Service.Infrastructure.DatabaseContext;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Utilities.MediatRPipeline.ExceptionHandling;
 
-namespace HistoryAccessorService.Service.Queries.CountEvents
+namespace History.Accessor.Service.Service.Queries.CountEvents
 {
     internal class CountAuditEntriesHandler : IRequestHandler<CountAuditEntries, Response<int>>
     {

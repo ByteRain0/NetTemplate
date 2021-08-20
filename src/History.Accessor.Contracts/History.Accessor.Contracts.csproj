@@ -3,7 +3,7 @@
     <!--Specific contracts needed for clients to use the history RA-->
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <RootNamespace>HistoryAccessor</RootNamespace>
+        <RootNamespace>History.Accessor.Contracts</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
       <ProjectReference Include="..\ExecutionPipeline\ExecutionPipeline.csproj" />

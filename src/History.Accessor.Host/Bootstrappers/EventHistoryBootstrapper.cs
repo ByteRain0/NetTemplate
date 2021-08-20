@@ -1,23 +1,24 @@
 using System.Collections.Generic;
 using System.Reflection;
 using AutoMapper;
-using HistoryAccessor.ServiceLevelContracts;
-using HistoryAccessorService.Infrastructure.DatabaseContext;
-using HistoryAccessorService.Service.Commands.RecordEvent;
+using History.Accessor.Contracts.ServiceLevelContracts;
+using History.Accessor.Service.Infrastructure.DatabaseContext;
+using History.Accessor.Service.Service;
+using History.Accessor.Service.Service.Commands.RecordEvent;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HistoryAccessorHost.Bootstrappers
+namespace History.Accessor.Host.Bootstrappers
 {
     public static class EventHistoryBootstrapper
     {
         public static void ConfigureEventHistory(this IServiceCollection services, IConfiguration config)
         {
             services.AddTransient<IHistoryContext, HistoryContext>();
-            services.AddTransient<IHistoryAccessor, HistoryAccessorService.Service.HistoryAccessor>();
-            services.AddMediatR(typeof(HistoryAccessorService.Service.HistoryAccessor));
+            services.AddTransient<IHistoryAccessor, HistoryAccessor>();
+            services.AddMediatR(typeof(HistoryAccessor));
             
             FluentValidation.ServiceCollectionExtensions.AddValidatorsFromAssemblies(services, 
                 new List<Assembly>(){typeof(RecordEvent).Assembly});

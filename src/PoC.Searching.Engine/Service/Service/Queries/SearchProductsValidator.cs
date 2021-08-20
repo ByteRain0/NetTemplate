@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Instruments.Searching.Engine.Contracts.Service.Service.Queries
+namespace PoC.Searching.Engine.Service.Service.Queries
 {
     public class SearchProductsValidator : AbstractValidator<SearchProducts>
     {

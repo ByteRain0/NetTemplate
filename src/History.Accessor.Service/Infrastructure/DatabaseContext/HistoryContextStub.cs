@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using HistoryAccessorService.Infrastructure.Models;
+using History.Accessor.Service.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace HistoryAccessorService.Infrastructure.DatabaseContext
+namespace History.Accessor.Service.Infrastructure.DatabaseContext
 {
     public class HistoryContextStub : IHistoryContext 
     {

@@ -1,7 +1,7 @@
-using HistoryAccessorService.Infrastructure.Models;
+using History.Accessor.Service.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace HistoryAccessorService.Infrastructure.DatabaseContext
+namespace History.Accessor.Service.Infrastructure.DatabaseContext
 {
     /// <summary>
     ///  In order to add migration run : dotnet ef migrations add InitialMigration -s ../Manager.Service.Host/

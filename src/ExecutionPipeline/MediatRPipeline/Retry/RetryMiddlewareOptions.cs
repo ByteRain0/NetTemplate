@@ -1,4 +1,4 @@
-namespace Utilities.MediatRPipeline.Retry
+namespace ExecutionPipeline.MediatRPipeline.Retry
 {
     public class RetryMiddlewareOptions
     {

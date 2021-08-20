@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http;
 
-namespace SessionAccessor.Contracts
+namespace Session.Accessor.Service.Contracts
 {
     public interface IExecutorAccessor
     {

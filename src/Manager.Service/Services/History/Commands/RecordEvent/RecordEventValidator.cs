@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Orchestra.Manager.Service.History.Commands.RecordEvent
+namespace Manager.Service.Services.History.Commands.RecordEvent
 {
     public class RecordEventValidator : AbstractValidator<RecordEvent>
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Utilities.MediatRPipeline.ExceptionHandling
+namespace ExecutionPipeline.MediatRPipeline.ExceptionHandling
 {
     /// <summary>
     /// At this point in time this part is pretty raw and still not really all that much useful.

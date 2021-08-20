@@ -2,7 +2,7 @@ using System;
 using System.Net;
 using Newtonsoft.Json;
 
-namespace Utilities.MediatRPipeline.ExceptionHandling
+namespace ExecutionPipeline.MediatRPipeline.ExceptionHandling
 {
     /// <summary>
     /// Used for BLL and low layer results.

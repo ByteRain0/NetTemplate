@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Utilities.MediatRPipeline.Loggers
+namespace ExecutionPipeline.MediatRPipeline.Loggers
 {
     public class RequestPerformanceMiddleware<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {

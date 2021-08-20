@@ -1,13 +1,13 @@
 using System.Threading;
 using System.Threading.Tasks;
-using HistoryAccessorService.Infrastructure.DatabaseContext;
-using HistoryAccessorService.Infrastructure.Models;
+using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
+using History.Accessor.Service.Infrastructure.DatabaseContext;
+using History.Accessor.Service.Infrastructure.Models;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Utilities.MediatRPipeline.ExceptionHandling;
 
-namespace HistoryAccessorService.Service.Commands.RecordEvent
+namespace History.Accessor.Service.Service.Commands.RecordEvent
 {
     internal class RecordEventHandler : IRequestHandler<RecordEvent, Response>
     {

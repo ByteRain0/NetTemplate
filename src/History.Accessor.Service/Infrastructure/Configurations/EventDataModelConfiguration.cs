@@ -1,8 +1,8 @@
-using HistoryAccessorService.Infrastructure.Models;
+using History.Accessor.Service.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HistoryAccessorService.Infrastructure.Configurations
+namespace History.Accessor.Service.Infrastructure.Configurations
 {
     public class EventDataModelConfiguration : IEntityTypeConfiguration<EventDataModel>
     {

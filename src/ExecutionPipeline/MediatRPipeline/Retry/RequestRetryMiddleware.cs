@@ -7,9 +7,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Polly;
-using Utilities.MediatRPipeline.ExceptionHandling;
 
-namespace Utilities.MediatRPipeline.Retry
+namespace ExecutionPipeline.MediatRPipeline.Retry
 {
     public class RequestRetryMiddleware<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {

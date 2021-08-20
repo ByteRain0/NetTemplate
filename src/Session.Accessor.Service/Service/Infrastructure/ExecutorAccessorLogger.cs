@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using SessionAccessor.Contracts;
+using Session.Accessor.Service.Contracts;
 
-namespace SessionAccessor.Service.Infrastructure
+namespace Session.Accessor.Service.Service.Infrastructure
 {
     public class ExecutorAccessorLogger : IExecutorAccessor
     {

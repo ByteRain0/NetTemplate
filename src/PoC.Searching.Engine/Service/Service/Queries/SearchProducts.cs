@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using Instruments.Searching.Engine.Contracts.Contracts.Contracts;
+using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
+using ExecutionPipeline.MediatRPipeline.Retry;
 using MediatR;
-using Utilities.MediatRPipeline.ExceptionHandling;
-using Utilities.MediatRPipeline.Retry;
+using PoC.Searching.Engine.Contracts.Contracts;
 
-namespace Instruments.Searching.Engine.Contracts.Service.Service.Queries
+namespace PoC.Searching.Engine.Service.Service.Queries
 {
     public class SearchProducts : IRequest<Response<IList<ProductDto>>>, IRetryMarker
     {

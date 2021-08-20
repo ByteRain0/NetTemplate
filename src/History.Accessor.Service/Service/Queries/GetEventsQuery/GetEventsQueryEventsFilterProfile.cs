@@ -1,7 +1,7 @@
 using AutoMapper;
-using HistoryAccessor.Contracts;
+using History.Accessor.Contracts.Contracts;
 
-namespace HistoryAccessorService.Service.Queries.GetEventsQuery
+namespace History.Accessor.Service.Service.Queries.GetEventsQuery
 {
     public class GetEventsQueryEventsFilterProfile : Profile
     {
