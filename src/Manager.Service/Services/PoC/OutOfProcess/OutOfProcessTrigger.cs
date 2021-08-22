@@ -12,7 +12,7 @@ namespace Manager.Service.Services.PoC.OutOfProcess
     [VoyagerRoute(HttpMethod.Post, "api/Dispatch")]
     public class OutOfProcessTrigger : IRequest<Response>
     {
-        public class OutOfProcessTriggerHandler : IRequestHandler<OutOfProcessTrigger,Response>
+        internal class OutOfProcessTriggerHandler : IRequestHandler<OutOfProcessTrigger,Response>
         {
             private readonly IMediator _mediator;
 

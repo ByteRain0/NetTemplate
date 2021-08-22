@@ -73,7 +73,7 @@ namespace ExecutionPipeline.MediatRPipeline.ExceptionHandling
         {
             return new Response(true, string.Empty, code);
         }
-
+        
         public static Response<T> Ok<T>(T value)
         {
             return new Response<T>(value, true, string.Empty, HttpStatusCode.OK);

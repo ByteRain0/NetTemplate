@@ -16,7 +16,7 @@ namespace Manager.Service.Services.History.Commands.RecordEvent
         private readonly IHistoryAccessor _historyAccessor;
 
         private readonly IMapper _mapper;
-
+        
         public HttpContext HttpContext { get; set; }
         
         public RecordEventHandler(IHistoryAccessor historyAccessor, IMapper mapper)
@@ -24,24 +24,11 @@ namespace Manager.Service.Services.History.Commands.RecordEvent
             _historyAccessor = historyAccessor;
             _mapper = mapper;
         }
-        
+
         public async Task<Response> Handle(RecordEvent request, CancellationToken cancellationToken)
         {
-            var operation = await _historyAccessor.RecordEvent(_mapper.Map<EventDto>(request), cancellationToken);
-            operation
-                .OnSuccess(() =>
-                {
-                    // Do some simple logic
-                    Console.WriteLine("The execution was successful");
-                })
-                .OnFailure(() =>
-                {
-                    // Do some simple logic
-                    Console.WriteLine("The execution was unsuccessful");
-                });
-            
-            return operation;
+            var act = await _historyAccessor.RecordEvent(_mapper.Map<EventDto>(request), cancellationToken);
+            return act;
         }
-
     }
 }
