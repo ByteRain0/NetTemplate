@@ -32,7 +32,7 @@ namespace ExecutionPipeline.MediatRPipeline.ExceptionHandling
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Error encountered while processing request '{request.ToString()}' error message : '{e.Message}'");
+                _logger.LogError(e, "Error encountered while processing request '{Request}' error message : '{ErrorMessage}'", request.ToString(), e.Message);
                 var response = JsonConvert.SerializeObject(Response.Fail(e.Message));
                 return JsonConvert.DeserializeObject<TResponse>(response);
             }

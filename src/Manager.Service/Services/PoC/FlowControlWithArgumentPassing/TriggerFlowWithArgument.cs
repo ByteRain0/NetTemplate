@@ -18,7 +18,6 @@ namespace Manager.Service.Services.PoC.FlowControlWithArgumentPassing
     {
         public async Task<Response<UserDto>> Handle(TriggerFlowWithArgument request, CancellationToken cancellationToken)
         {
-            
             var testFlow = await Act1()
                 .Act
                 (
