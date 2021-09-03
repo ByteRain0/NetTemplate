@@ -1,3 +1,4 @@
+using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using MediatR;
 
 namespace MessageDispatcher.Contracts
@@ -11,14 +12,16 @@ namespace MessageDispatcher.Contracts
             _messageDispatcher = messageDispatcher;
         }
         
-        public static void Enqueue(this IMediator mediator, string jobIdentifier, IRequest request)
+        public static Response Enqueue(this IMediator mediator, string jobIdentifier, IRequest request)
         {
-            _messageDispatcher.Dispatch(jobIdentifier, request);
+            var operation = _messageDispatcher.Dispatch(jobIdentifier, request);
+            return operation;
         }
         
-        public static void Enqueue<T>(this IMediator mediator, string jobIdentifier, IRequest<T> request)
+        public static Response Enqueue<T>(this IMediator mediator, string jobIdentifier, IRequest<T> request)
         {
-            _messageDispatcher.Dispatch(jobIdentifier, request);
+            var operation = _messageDispatcher.Dispatch(jobIdentifier, request);
+            return operation;
         }
     }
 }

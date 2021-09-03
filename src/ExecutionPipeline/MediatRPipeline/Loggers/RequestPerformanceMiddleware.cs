@@ -29,7 +29,7 @@ namespace ExecutionPipeline.MediatRPipeline.Loggers
             if (_timer.ElapsedMilliseconds <= 5000) return response;
             var name = typeof(TRequest).Name;
 
-            _logger.LogWarning($"Long Running Request: {name} ({_timer.ElapsedMilliseconds} milliseconds) {request}");
+            _logger.LogWarning("Long Running Request: '{Name}' ({ElapsedTime} milliseconds) '{Request}'", name, _timer.ElapsedMilliseconds, request);
 
             return response;
         }

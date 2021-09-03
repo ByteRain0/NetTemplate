@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR.Pipeline;
@@ -17,8 +18,8 @@ namespace ExecutionPipeline.MediatRPipeline.Loggers
         public Task Process(TRequest request, CancellationToken cancellationToken)
         {
             var name = typeof(TRequest).Name;
-
-            _logger.LogInformation("Executing request: {Name} {@Request}", name, request);
+            
+            _logger.LogInformation("Executing request: '{Name}' '{Request}'", name, request);
 
             return Task.CompletedTask;
         }

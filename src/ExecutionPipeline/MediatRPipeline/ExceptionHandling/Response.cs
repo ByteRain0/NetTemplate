@@ -15,7 +15,7 @@ namespace ExecutionPipeline.MediatRPipeline.ExceptionHandling
         
         [JsonProperty] // Workaround the serializer.
         public string StackTrace { get; private set; }
-        
+
         /// <summary>
         /// Set to string if there will be a need to define custom domain / interaction / data transfer specific response codes.
         /// Example would be gRPC and REST response codes.
@@ -73,7 +73,7 @@ namespace ExecutionPipeline.MediatRPipeline.ExceptionHandling
         {
             return new Response(true, string.Empty, code);
         }
-
+        
         public static Response<T> Ok<T>(T value)
         {
             return new Response<T>(value, true, string.Empty, HttpStatusCode.OK);
@@ -88,18 +88,8 @@ namespace ExecutionPipeline.MediatRPipeline.ExceptionHandling
         {
             return new Response<T>(value, true, string.Empty, code);
         }
-
-        public static Response Combine(params Response[] results)
-        {
-            foreach (var result in results)
-            {
-                if (result.IsFailure)
-                    return result;
-            }
-
-            return Ok();
-        }
     }
+    
     public class Response<T> : Response
     {
         private readonly T _value;

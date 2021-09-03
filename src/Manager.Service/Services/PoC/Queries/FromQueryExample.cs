@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Voyager.Api;
 
 namespace Manager.Service.Services.PoC.Queries
