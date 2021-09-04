@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -14,7 +15,7 @@ namespace ExecutionPipeline.MediatRPipeline.Retry
     {
         private readonly ILogger<TRequest> _logger;
 
-        private readonly RetryMiddlewareOptions _config;
+        private RetryMiddlewareOptions _config;
 
         public RequestRetryMiddleware(ILogger<TRequest> logger, IOptions<RetryMiddlewareOptions> config)
         {
@@ -29,12 +30,19 @@ namespace ExecutionPipeline.MediatRPipeline.Retry
             {
                 return await next();
             }
+
+            var customConfiguration = _config.CustomConfiguration.FirstOrDefault(x => x.Name == typeof(TRequest).Name);
+            if (customConfiguration != null)
+            {
+                _config.DefaultOperationIncrementalCount = customConfiguration.IncrementalCount;
+                _config.DefaultOperationRetryCount = customConfiguration.RetryCount;
+            }
             
             var retryPolicy = Policy
                 .Handle<Exception>()
-                .WaitAndRetryAsync(retryCount: _config.OperationRetryCount, sleepDurationProvider: retryAttempt =>
+                .WaitAndRetryAsync(retryCount: _config.DefaultOperationRetryCount, sleepDurationProvider: retryAttempt =>
                     {
-                        var timeToWait = TimeSpan.FromSeconds(retryAttempt * _config.OperationIncrementalCount);
+                        var timeToWait = TimeSpan.FromSeconds(retryAttempt * _config.DefaultOperationIncrementalCount);
                         _logger.LogTrace(
                             $"Execution delay of request '{JsonConvert.SerializeObject(request)}' for '{timeToWait.TotalSeconds}' seconds...");
                         return timeToWait;

@@ -16,18 +16,10 @@ namespace Session.Accessor.Service.Service.Infrastructure
             _accessor = accessor;
         }
 
-        public string GetExecutorId(HttpContext header)
+        public ExecutorInfoDTO GetExecutor(HttpContext header)
         {
             _logger.LogInformation("Requested the executor id from the request header");
-            var value = _accessor.GetExecutorId(header);
-            _logger.LogInformation("Finished processing the request");
-            return value;
-        }
-
-        public string GetExecutorName(HttpContext header)
-        {
-            _logger.LogInformation("Requested the executor name from the request header");
-            var value = _accessor.GetExecutorName(header);
+            var value = _accessor.GetExecutor(header);
             _logger.LogInformation("Finished processing the request");
             return value;
         }

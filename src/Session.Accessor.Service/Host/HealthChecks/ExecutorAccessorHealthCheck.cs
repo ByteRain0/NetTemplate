@@ -17,10 +17,9 @@ namespace Session.Accessor.Service.Host.HealthChecks
         public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var executorId = _executorAccessor.GetExecutorId(default);
-            var executorName = _executorAccessor.GetExecutorName(default);
-
-            if (executorId is not null && executorName is not null)
+            var executorId = _executorAccessor.GetExecutor(default);
+            
+            if (executorId is not null)
             {
                 return Task.FromResult(
                     HealthCheckResult.Healthy("A healthy result."));

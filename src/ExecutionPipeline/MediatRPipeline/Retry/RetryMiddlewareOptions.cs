@@ -1,9 +1,13 @@
+using System.Collections.Generic;
+
 namespace ExecutionPipeline.MediatRPipeline.Retry
 {
     public class RetryMiddlewareOptions
     {
-        public int OperationRetryCount { get; set; } = 4;
+        public int DefaultOperationRetryCount { get; set; } = 4;
 
-        public int OperationIncrementalCount { get; set; } = 10;
+        public int DefaultOperationIncrementalCount { get; set; } = 10;
+
+        public List<CustomActionRetryConfiguration> CustomConfiguration { get; set; }
     }
 }

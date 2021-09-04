@@ -10,8 +10,6 @@ namespace Session.Accessor.Service.Contracts
         /// </summary>
         /// <param name="header"></param>
         /// <returns></returns>
-        string GetExecutorId(HttpContext header);
-
-        string GetExecutorName(HttpContext header);
+        ExecutorInfoDTO GetExecutor(HttpContext header);
     }
 }
