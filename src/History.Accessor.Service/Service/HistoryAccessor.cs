@@ -43,7 +43,7 @@ namespace History.Accessor.Service.Service
             return operation;
         }
         
-        public async Task<Response<int>> CountEntries(CancellationToken cancellationToken)
+        public async Task<Response<int>> CountEvents(CancellationToken cancellationToken)
         {
             var operation = await _mediator.Send(new CountAuditEntries(),cancellationToken);
             return operation;

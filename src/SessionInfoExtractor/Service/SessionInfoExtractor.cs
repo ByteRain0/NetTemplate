@@ -3,9 +3,9 @@ using Session.Accessor.Service.Contracts;
 
 namespace Session.Accessor.Service.Service
 {
-    public class ExecutorAccessor : IExecutorAccessor
+    public class SessionInfoExtractor : ISessionInfoExtractor
     {
-        public ExecutorInfoDTO GetExecutor(HttpContext header)
+        public ExecutorInfoDTO ExtractExecutorInformation(HttpContext header)
         {
             return new ExecutorInfoDTO()
             {

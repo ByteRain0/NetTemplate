@@ -3,12 +3,14 @@ using System.Reflection;
 using AutoMapper;
 using History.Accessor.Contracts.ServiceLevelContracts;
 using History.Accessor.Service.Infrastructure.DatabaseContext;
+using History.Accessor.Service.Infrastructure.HealthChecks;
 using History.Accessor.Service.Service;
 using History.Accessor.Service.Service.Commands.RecordEvent;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace History.Accessor.Host.Bootstrappers
 {
@@ -31,6 +33,13 @@ namespace History.Accessor.Host.Bootstrappers
             services.AddDbContext<HistoryContext>(
                 opts => opts.UseNpgsql(config["DatabaseConnectionString"])
             );
+            
+            var hcBuilder = services.AddHealthChecks();
+            
+            hcBuilder.AddCheck<HistoryAccessorHealthCheck>(
+                "history_accessor_health_check",
+                failureStatus: HealthStatus.Degraded,
+                tags: new[] { "HistoryAccessor" });
         }
     }
 }

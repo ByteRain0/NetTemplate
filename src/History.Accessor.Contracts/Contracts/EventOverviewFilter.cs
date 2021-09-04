@@ -7,7 +7,7 @@ namespace History.Accessor.Contracts.Contracts
     {
         public int Take { get; set; } = Int32.MaxValue;
 
-        public int Skip { get; set; }
+        public int Skip { get; set; } = 0;
         
         public List<string> Events { get; set; } = new List<string>();
         

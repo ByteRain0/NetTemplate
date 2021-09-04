@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Session.Accessor.Service.Contracts
 {
-    public interface IExecutorAccessor
+    public interface ISessionInfoExtractor
     {
         /// <summary>
         /// Extract the UserId from the authorization data.
@@ -10,6 +10,6 @@ namespace Session.Accessor.Service.Contracts
         /// </summary>
         /// <param name="header"></param>
         /// <returns></returns>
-        ExecutorInfoDTO GetExecutor(HttpContext header);
+        ExecutorInfoDTO ExtractExecutorInformation(HttpContext header);
     }
 }
