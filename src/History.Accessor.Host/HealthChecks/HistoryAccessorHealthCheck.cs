@@ -4,7 +4,7 @@ using History.Accessor.Contracts.Contracts;
 using History.Accessor.Contracts.ServiceLevelContracts;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace History.Accessor.Service.Infrastructure.HealthChecks
+namespace History.Accessor.Host.HealthChecks
 {
     public class HistoryAccessorHealthCheck : IHealthCheck
     {
