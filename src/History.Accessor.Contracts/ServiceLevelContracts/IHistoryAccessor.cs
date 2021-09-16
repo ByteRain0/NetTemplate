@@ -14,6 +14,6 @@ namespace History.Accessor.Contracts.ServiceLevelContracts
 
         Task<Response> RecordEvent(EventDto model, CancellationToken cancellationToken);
 
-        Task<Response<int>> CountEntries(CancellationToken cancellationToken);
+        Task<Response<int>> CountEvents(CancellationToken cancellationToken);
     }
 }

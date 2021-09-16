@@ -20,7 +20,8 @@ namespace History.Accessor.Service.Service.Queries.GetEventsQuery
 
         public async Task<Response<EventOverviewDto>> Handle(GetEventsQuery request, CancellationToken cancellationToken)
         {
-            var entriesQuery = _context.Events.OrderByDescending(x => x.DateTime)
+            var entriesQuery = _context.Events
+                .OrderByDescending(x => x.DateTime)
                 .Where(request.ActionFilter())
                 .Where(request.EntityFilter())
                 .Where(request.UserIdFilter())
