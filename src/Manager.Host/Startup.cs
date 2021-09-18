@@ -41,6 +41,7 @@ namespace Manager.Host
                 app.UseDeveloperExceptionPage();
             }
 
+            app.ApplyEventHistoryMigrations();
             app.ConfigureSwagger();
             
             app.UseVoyagerExceptionHandler();

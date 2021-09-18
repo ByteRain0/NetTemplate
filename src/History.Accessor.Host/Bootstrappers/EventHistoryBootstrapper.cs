@@ -7,6 +7,7 @@ using History.Accessor.Service.Infrastructure.DatabaseContext;
 using History.Accessor.Service.Service;
 using History.Accessor.Service.Service.Commands.RecordEvent;
 using MediatR;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,6 +41,12 @@ namespace History.Accessor.Host.Bootstrappers
                 "history_accessor_health_check",
                 failureStatus: HealthStatus.Degraded,
                 tags: new[] { "HistoryAccessor" });
+        }
+
+        public static void ApplyEventHistoryMigrations(this IApplicationBuilder app)
+        {
+            var context = app.ApplicationServices.GetService<HistoryContext>();
+            context?.Database.Migrate();
         }
     }
 }
