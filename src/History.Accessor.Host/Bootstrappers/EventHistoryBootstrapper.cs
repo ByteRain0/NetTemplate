@@ -45,8 +45,13 @@ namespace History.Accessor.Host.Bootstrappers
 
         public static void ApplyEventHistoryMigrations(this IApplicationBuilder app)
         {
-            var context = app.ApplicationServices.GetService<HistoryContext>();
-            context?.Database.Migrate();
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<HistoryContext>())
+                {
+                    context?.Database.Migrate();
+                }
+            }
         }
     }
 }
