@@ -31,13 +31,16 @@ namespace ExecutionPipeline.MediatRPipeline.Retry
                 return await next();
             }
 
-            var customConfiguration = _config.CustomConfiguration.FirstOrDefault(x => x.Name == typeof(TRequest).Name);
-            if (customConfiguration != null)
+            if (_config.CustomConfiguration is not null)
             {
-                _config.DefaultOperationIncrementalCount = customConfiguration.IncrementalCount;
-                _config.DefaultOperationRetryCount = customConfiguration.RetryCount;
+                var customConfiguration = _config.CustomConfiguration.FirstOrDefault(x => x.Name == typeof(TRequest).Name);
+                if (customConfiguration is not null)
+                {
+                    _config.DefaultOperationIncrementalCount = customConfiguration.IncrementalCount;
+                    _config.DefaultOperationRetryCount = customConfiguration.RetryCount;
+                }
             }
-            
+
             var retryPolicy = Policy
                 .Handle<Exception>()
                 .WaitAndRetryAsync(retryCount: _config.DefaultOperationRetryCount, sleepDurationProvider: retryAttempt =>
