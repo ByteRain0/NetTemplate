@@ -256,3 +256,4 @@ paket-files/
 
 # CodeRush
 .cr/
+src/Manager.Host/appsettings.json
