@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace History.Accessor.Service.Service.Queries.CountEvents
 {
-    internal class CountAuditEntriesHandler : IRequestHandler<CountAuditEntries, Response<int>>
+    internal class CountAuditEntriesHandler : IRequestHandler<CountEventEntries, Response<int>>
     {
         private readonly IHistoryContext _context;
 
@@ -17,7 +17,7 @@ namespace History.Accessor.Service.Service.Queries.CountEvents
             _context = context;
         }
 
-        public async Task<Response<int>> Handle(CountAuditEntries request, CancellationToken cancellationToken)
+        public async Task<Response<int>> Handle(CountEventEntries request, CancellationToken cancellationToken)
         {
             return Response.Ok(await _context.Events.CountAsync(CancellationToken.None));
         }

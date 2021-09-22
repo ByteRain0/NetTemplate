@@ -15,6 +15,6 @@ namespace History.Accessor.Contracts
 
         Task<Response> RecordEvent(RecordEvent request, CancellationToken cancellationToken);
 
-        Task<Response<int>> CountEvents(CountAuditEntries request, CancellationToken cancellationToken);
+        Task<Response<int>> CountEvents(CountEventEntries request, CancellationToken cancellationToken);
     }
 }
