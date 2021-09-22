@@ -2,8 +2,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
-using History.Accessor.Contracts.Contracts;
-using History.Accessor.Contracts.ServiceLevelContracts;
+using History.Accessor.Contracts;
+using History.Accessor.Contracts.Commands;
+using History.Accessor.Contracts.Queries;
 using History.Accessor.Service.Service.Commands.RecordEvent;
 using History.Accessor.Service.Service.Queries.CountEvents;
 using History.Accessor.Service.Service.Queries.GetEventsQuery;
@@ -28,24 +29,24 @@ namespace History.Accessor.Service.Service
         /// be picked up by an Azure Function and asynchronously stored in a Database.
         /// But for simplicity sake we will just use an in memory message dispatcher like MediatR.
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="request"></param>
         /// <param name="cancellationToken"></param> 
         /// <returns></returns>
-        public async Task<Response> RecordEvent(EventDto model, CancellationToken cancellationToken)
+        public async Task<Response> RecordEvent(RecordEvent request, CancellationToken cancellationToken)
         {
-            var operation = await _mediator.Send(_mapper.Map<RecordEvent>(model),cancellationToken);
+            var operation = await _mediator.Send(request:request,cancellationToken:cancellationToken);
             return operation;
         }
         
-        public async Task<Response<EventOverviewDto>> GetEvents(EventOverviewFilter filter, CancellationToken cancellationToken)
+        public async Task<Response<EventOverviewDto>> GetEvents(GetEventsQuery query, CancellationToken cancellationToken)
         {
-            var operation = await _mediator.Send(_mapper.Map<GetEventsQuery>(filter),cancellationToken);
+            var operation = await _mediator.Send(request:query,cancellationToken:cancellationToken);
             return operation;
         }
         
-        public async Task<Response<int>> CountEvents(CancellationToken cancellationToken)
+        public async Task<Response<int>> CountEvents(CountAuditEntries request, CancellationToken cancellationToken)
         {
-            var operation = await _mediator.Send(new CountAuditEntries(),cancellationToken);
+            var operation = await _mediator.Send(request:request,cancellationToken:cancellationToken);
             return operation;
         }
     }

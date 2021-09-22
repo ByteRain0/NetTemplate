@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Reflection;
 using AutoMapper;
-using History.Accessor.Contracts.ServiceLevelContracts;
+using History.Accessor.Contracts;
+using History.Accessor.Contracts.Commands;
 using History.Accessor.Host.HealthChecks;
 using History.Accessor.Service.Infrastructure.DatabaseContext;
 using History.Accessor.Service.Service;

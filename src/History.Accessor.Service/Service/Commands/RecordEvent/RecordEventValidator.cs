@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace History.Accessor.Service.Service.Commands.RecordEvent
 {
-    public class RecordEventValidator : AbstractValidator<RecordEvent>
+    public class RecordEventValidator : AbstractValidator<Contracts.Commands.RecordEvent>
     {
         public RecordEventValidator()
         {

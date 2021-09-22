@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
-using History.Accessor.Contracts.Contracts;
-using History.Accessor.Contracts.ServiceLevelContracts;
+using History.Accessor.Contracts;
+using History.Accessor.Contracts.Queries;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace History.Accessor.Host.HealthChecks
@@ -18,7 +18,7 @@ namespace History.Accessor.Host.HealthChecks
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var operation = await _historyAccessor.GetEvents(new EventOverviewFilter(), cancellationToken);
+            var operation = await _historyAccessor.GetEvents(new GetEventsQuery(), cancellationToken);
             
             if (operation.IsSuccess)
             {

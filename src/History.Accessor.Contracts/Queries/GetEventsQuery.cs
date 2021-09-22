@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
+using MediatR;
 
-namespace History.Accessor.Contracts.Contracts
+namespace History.Accessor.Contracts.Queries
 {
-    public class EventOverviewFilter
+    public class GetEventsQuery : IRequest<Response<EventOverviewDto>>
     {
         public int Take { get; set; } = Int32.MaxValue;
 

@@ -2,14 +2,14 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
-using History.Accessor.Contracts.Contracts;
+using History.Accessor.Contracts;
 using History.Accessor.Service.Infrastructure.DatabaseContext;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace History.Accessor.Service.Service.Queries.GetEventsQuery
 {
-    internal class GetEventsQueryHandler : IRequestHandler<GetEventsQuery, Response<EventOverviewDto>>
+    internal class GetEventsQueryHandler : IRequestHandler<Contracts.Queries.GetEventsQuery, Response<EventOverviewDto>>
     {
         private readonly IHistoryContext _context;
 
@@ -18,7 +18,7 @@ namespace History.Accessor.Service.Service.Queries.GetEventsQuery
             _context = context;
         }
 
-        public async Task<Response<EventOverviewDto>> Handle(GetEventsQuery request, CancellationToken cancellationToken)
+        public async Task<Response<EventOverviewDto>> Handle(Contracts.Queries.GetEventsQuery request, CancellationToken cancellationToken)
         {
             var entriesQuery = _context.Events
                 .OrderByDescending(x => x.DateTime)
@@ -54,5 +54,9 @@ namespace History.Accessor.Service.Service.Queries.GetEventsQuery
                 Count = entriesCount
             });
         }
+        
+        
+        
+        
     }
 }
