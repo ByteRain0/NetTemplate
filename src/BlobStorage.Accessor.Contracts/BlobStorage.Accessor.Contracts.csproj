@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <RootNamespace>PoC.Searching.Engine</RootNamespace>
+        <RootNamespace>BlobStorage.Accessor.Contracts</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
@@ -20,25 +21,22 @@ namespace History.Accessor.Service.Service.Commands.RecordEvent
             _context = context;
             _logger = logger;
         }
-        
+
         public async Task<Response> Handle(Contracts.Commands.RecordEvent model, CancellationToken cancellationToken)
         {
             EventDataModel eventDataModel = new EventDataModel(
                 message: model.Message,
                 userId: model.UserId,
                 userName: model.UserName,
-                eventName: model.EventName);
-            
-            if (string.IsNullOrWhiteSpace(model.EntityPrimaryKey))
-            {
-                eventDataModel.AssignEntityToAudit(model.EntityPrimaryKey, entityType:model.EntityType);
-            }
-             
+                eventName: model.EventName,
+                entityPrimaryKey: model.EntityPrimaryKey,
+                entityType: model.EntityType);
+
             _logger.LogTrace($"Recording event : '{JsonConvert.SerializeObject(eventDataModel)}' to local database.");
-            
-            await _context.Events.AddAsync(eventDataModel,cancellationToken);
+
+            await _context.Events.AddAsync(eventDataModel, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken: CancellationToken.None);
-            
+
             return Response.Ok();
         }
     }
