@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -25,6 +26,7 @@ namespace Manager.Service.Services.History.Commands.RecordEvent
 
         public async Task<Response> Handle(RecordEvent request, CancellationToken cancellationToken)
         {
+            throw new InvalidOperationException("SomeException");
             var act = await _historyAccessor.RecordEvent(_mapper.Map<global::History.Accessor.Contracts.Commands.RecordEvent>(request), cancellationToken);
             return act;
         }

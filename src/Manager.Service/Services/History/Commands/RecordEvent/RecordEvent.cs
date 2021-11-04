@@ -6,7 +6,7 @@ using Voyager.Api;
 namespace Manager.Service.Services.History.Commands.RecordEvent
 {
     [VoyagerRoute(HttpMethod.Post,"api/recordEvent")]
-    public class RecordEvent : IRequest<Response>, IRetryMarker
+    public class RecordEvent : IRequest<Response>
     {
         public string Message { get; set; }
         

@@ -69,13 +69,8 @@ namespace History.Accessor.Tests.Infrastructure
             return config;
         }
         
-        protected T GetInstance<T>(string instanceKey = null)
+        protected T GetService<T>()
         {
-            if (string.IsNullOrWhiteSpace(instanceKey) == false)
-            {
-                return ServiceProvider.GetService<T>();
-            }
-
             return ServiceProvider.GetService<T>();
         }
         

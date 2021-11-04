@@ -23,7 +23,7 @@ namespace History.Accessor.Tests.AccessorTests.Commands
         {
             //Assert
             var command = new RecordEvent();
-            var mediatr = GetInstance<IMediator>();
+            var mediatr = GetService<IMediator>();
 
             //Act
             var operation = await mediatr.Send(command);
