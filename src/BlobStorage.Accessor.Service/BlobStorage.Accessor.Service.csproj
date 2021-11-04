@@ -2,11 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <RootNamespace>PoC.Searching.Engine</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ExecutionPipeline\ExecutionPipeline.csproj" />
+      <ProjectReference Include="..\BlobStorage.Accessor.Contracts\BlobStorage.Accessor.Contracts.csproj" />
     </ItemGroup>
 
 </Project>

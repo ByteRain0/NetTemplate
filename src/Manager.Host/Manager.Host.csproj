@@ -24,6 +24,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\AzureKeyVault\AzureKeyVault.csproj" />
+      <ProjectReference Include="..\BlobStorage.Accessor.Host\BlobStorage.Accessor.Host.csproj" />
       <ProjectReference Include="..\History.Accessor.Contracts\History.Accessor.Contracts.csproj" />
       <ProjectReference Include="..\History.Accessor.Host\History.Accessor.Host.csproj" />
       <ProjectReference Include="..\MessageDispatcher\MessageDispatcher.csproj" />

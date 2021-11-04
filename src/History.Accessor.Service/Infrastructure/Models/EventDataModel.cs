@@ -11,7 +11,7 @@ namespace History.Accessor.Service.Infrastructure.Models
         }
         
         public EventDataModel(string message, string userId,
-            string userName, string eventName)
+            string userName, string eventName, string entityPrimaryKey, string entityType)
         {
             this.Id = Guid.NewGuid();
             this.DateTime = DateTime.UtcNow;
@@ -19,16 +19,10 @@ namespace History.Accessor.Service.Infrastructure.Models
             this.UserId = userId;
             this.UserName = userName;
             this.EventName = eventName;
-        }
-
-        public void AssignEntityToAudit(string value, string entityType)
-        {
-            if (!string.IsNullOrWhiteSpace(this.EntityPrimaryKey))
-                throw new InvalidOperationException("Cannot reassign history log to another entry");
-            this.EntityPrimaryKey = value;
+            this.EntityPrimaryKey = entityPrimaryKey;
             this.EntityType = entityType;
         }
-
+        
         public Guid Id { get; private set; }
 
         public DateTime DateTime { get; private set; }

@@ -1,3 +1,4 @@
+using BlobStorage.Accessor.Host.Bootstrappers;
 using ExecutionPipeline.Bootstrapper;
 using History.Accessor.Host.Bootstrappers;
 using Manager.Host.Bootstrappers;
@@ -32,6 +33,7 @@ namespace Manager.Host
             services.ConfigureSearchingEngine();
             services.ConfigureSessionAccessors();
             services.ConfigureMessageDispatcher(Configuration);
+            services.ConfigureBlobStorage(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
