@@ -6,7 +6,7 @@ namespace Manager.Host.Bootstrappers
 {
     public static class SwaggerBootstrapper
     {
-        public static void ConfigureSwagger(this IServiceCollection services)
+        public static void AddSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {
@@ -14,7 +14,7 @@ namespace Manager.Host.Bootstrappers
             });
         }
 
-        public static void ConfigureSwagger(this IApplicationBuilder app)
+        public static void AddSwagger(this IApplicationBuilder app)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Web v1"));

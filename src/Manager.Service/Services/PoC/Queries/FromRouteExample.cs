@@ -13,7 +13,7 @@ namespace Manager.Service.Services.PoC.Queries
         [Voyager.Api.FromRoute]
         public string Property { get; set; }
         
-        public class FromRouteExampleHandler : IRequestHandler<FromRouteExample, Response>
+        internal class FromRouteExampleHandler : IRequestHandler<FromRouteExample, Response>
         {
             public Task<Response> Handle(FromRouteExample request, CancellationToken cancellationToken)
             {

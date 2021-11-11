@@ -9,7 +9,7 @@ using Voyager.Api;
 
 namespace Manager.Service.Services.PoC.OutOfProcess
 {
-    [VoyagerRoute(HttpMethod.Post, "api/Dispatch")]
+    [VoyagerRoute(HttpMethod.Post, "api/DispatchMessage")]
     public class OutOfProcessTrigger : IRequest<Response>
     {
         internal class OutOfProcessTriggerHandler : IRequestHandler<OutOfProcessTrigger,Response>

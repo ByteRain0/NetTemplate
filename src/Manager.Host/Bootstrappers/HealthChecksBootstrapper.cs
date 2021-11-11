@@ -6,7 +6,7 @@ namespace Manager.Host.Bootstrappers
 {
     public static class HealthChecksBootstrapper
     {
-        public static void EnableHealthChecks(this IApplicationBuilder app)
+        public static void UseHealthChecks(this IApplicationBuilder app)
         {
             app.UseRouting();
             

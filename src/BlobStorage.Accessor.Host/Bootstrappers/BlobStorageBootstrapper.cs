@@ -9,7 +9,7 @@ namespace BlobStorage.Accessor.Host.Bootstrappers
 {
     public static class BlobStorageBootstrapper
     {
-        public static void ConfigureBlobStorage(this IServiceCollection services, IConfiguration config)
+        public static void AddBlobStorage(this IServiceCollection services, IConfiguration config)
         {
             services.AddTransient<IStorageService, AzureStorageAccessor>();
             services.Configure<AzureStorageConfigs>(config.GetSection("AzureStorage"));

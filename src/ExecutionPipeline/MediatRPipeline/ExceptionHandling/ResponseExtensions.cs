@@ -92,6 +92,64 @@ namespace ExecutionPipeline.MediatRPipeline.ExceptionHandling
             
             return await onFailure.Invoke(default);
         }
+
+        public static void Act<PREVIOUS_RESPONSE>(this Response<PREVIOUS_RESPONSE> response, Action<PREVIOUS_RESPONSE> onSuccess, Action onFailure = null)
+        {
+            if (response == null)
+            {
+                if (onFailure == null)
+                {
+                    onFailure();
+                }
+
+                onFailure.Invoke();
+            }
+
+            var wasSuccessfullyExecuted = response;
+
+            if (wasSuccessfullyExecuted.IsSuccess)
+            {
+                onSuccess.Invoke(wasSuccessfullyExecuted.Value);
+                return;
+                
+            }
+
+            if (onFailure == null)
+            {
+                return;
+            }
+            
+            onFailure.Invoke();
+        }
+        
+        public static async void Act<PREVIOUS_RESPONSE>(this Task<Response<PREVIOUS_RESPONSE>> response, Action<PREVIOUS_RESPONSE> onSuccess, Action onFailure = null)
+        {
+            if (response == null)
+            {
+                if (onFailure == null)
+                {
+                    onFailure();
+                }
+
+                onFailure.Invoke();
+            }
+
+            var wasSuccessfullyExecuted = await response;
+
+            if (wasSuccessfullyExecuted.IsSuccess)
+            {
+                onSuccess.Invoke(wasSuccessfullyExecuted.Value);
+                return;
+                
+            }
+
+            if (onFailure == null)
+            {
+                return;
+            }
+            
+            onFailure.Invoke();
+        }
         
     }
     

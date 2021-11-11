@@ -8,7 +8,7 @@ using Voyager.Api;
 
 namespace Manager.Service.Services.PoC.FlowControlWithArgumentPassing
 {
-    [VoyagerRoute(HttpMethod.Post, "api/triggerWithPass")]
+    [VoyagerRoute(HttpMethod.Post, "api/TriggerFlowWithParametersPassing")]
     public class TriggerFlowWithArgument : IRequest<Response<TriggerFlowWithArgumentHandler.UserDto>>
     {
         // Example of flow in which there are parameters that are send from one step over to another.

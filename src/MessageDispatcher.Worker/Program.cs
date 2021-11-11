@@ -32,11 +32,11 @@ namespace MessageDispatcher.Worker
                 {
                     var serviceConfiguration = services.BuildServiceProvider().GetService<IConfiguration>();
                     
-                    services.ConfigureManagerServices();
-                    services.ConfigureExecutionPipeline();
-                    services.ConfigureEventHistory(serviceConfiguration);
-                    services.ConfigureSearchingEngine();
-                    services.ConfigureSessionAccessors();
+                    services.AddManagerServices();
+                    services.AddExecutionPipeline();
+                    services.AddEventHistory(serviceConfiguration);
+                    services.AddSearchingEngine();
+                    services.AddSessionAccessors();
                     services.AddTransient<IMessageDispatcher, HangFireDispatcher>();
                     
                     services.AddHangfire(configuration =>

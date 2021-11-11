@@ -9,7 +9,7 @@ namespace Manager.Service.Bootstrappers
 {
     public static class OrchestraManagerBootstrapper
     {
-        public static void ConfigureManagerServices(this IServiceCollection services)
+        public static void AddManagerServices(this IServiceCollection services)
         {
             services.AddControllers();
             services.AddVoyager(c => { c.AddAssemblyWith<RecordEvent>(); });

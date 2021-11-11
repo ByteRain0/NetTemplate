@@ -5,7 +5,7 @@ using Voyager.Api;
 
 namespace Manager.Service.Services.History.Commands.RecordEvent
 {
-    [VoyagerRoute(HttpMethod.Post,"api/recordEvent")]
+    [VoyagerRoute(HttpMethod.Post,"api/RecordEvent")]
     public class RecordEvent : IRequest<Response>
     {
         public string Message { get; set; }

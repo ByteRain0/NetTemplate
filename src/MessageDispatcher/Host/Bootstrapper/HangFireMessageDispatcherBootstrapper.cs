@@ -10,7 +10,7 @@ namespace MessageDispatcher.Host.Bootstrapper
 {
     public static class HangFireMessageDispatcherBootstrapper
     {
-        public static IServiceCollection ConfigureMessageDispatcher(this IServiceCollection services,
+        public static IServiceCollection AddMessageDispatcher(this IServiceCollection services,
             IConfiguration configuration)
         {
             services.AddTransient<IMessageDispatcher, HangFireDispatcher>();
@@ -22,7 +22,7 @@ namespace MessageDispatcher.Host.Bootstrapper
             return services;
         }
 
-        public static IApplicationBuilder ConfigureMessageDispatcher(this IApplicationBuilder app)
+        public static IApplicationBuilder UseMessageDispatcher(this IApplicationBuilder app)
         {
             MediatrQueueExtension.Configure(app.ApplicationServices.GetService<IMessageDispatcher>()); 
             

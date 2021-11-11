@@ -7,7 +7,7 @@ using Voyager.Api;
 
 namespace Manager.Service.Services.PoC.FlowControl
 {
-    [VoyagerRoute(HttpMethod.Post,"api/triggerFlow")]
+    [VoyagerRoute(HttpMethod.Post,"api/TriggerFlow")]
     public class TriggerFlow : IRequest<Response>
     {
         // Example of simple flow where the steps have no dependencies on each other.

@@ -36,8 +36,8 @@ namespace History.Accessor.Tests.Infrastructure
             var services = new ServiceCollection();
             var configuration = InitConfiguration();
 
-            services.ConfigureEventHistory(configuration);
-            services.ConfigureExecutionPipeline();
+            services.AddEventHistory(configuration);
+            services.AddExecutionPipeline();
             
             var serviceProvider = services
                 .AddEntityFrameworkInMemoryDatabase()

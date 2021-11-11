@@ -58,11 +58,20 @@ namespace ExecutionPipeline.MediatRPipeline.ExceptionHandling
             return new Response(false,message, code);
         }
 
+        public static Response<T> Fail<T>(string message)
+        {
+            return new Response<T>(default(T), false, message, HttpStatusCode.BadRequest);
+        }
+
         public static Response<T> Fail<T>(string message, string code)
         {
             return new Response<T>(default(T),false,message, code);
         }
 
+        public static Response<T> Fail<T>(string message, HttpStatusCode code)
+        {
+            return new Response<T>(default(T),false,message, code);
+        }
 
         public static Response Ok()
         {

@@ -12,10 +12,10 @@ namespace Manager.Service.Services.PoC.PerformanceTest
     /// <summary>
     /// Small basic timed test to test the performance of running 1k request in sequence.
     /// </summary>
-    [VoyagerRoute(HttpMethod.Get, "api/performance")]
+    [VoyagerRoute(HttpMethod.Get, "api/TestSequencePerformance")]
     public class PerformanceTest : IRequest<Response<long>>
     {
-        public class PerformanceTestHandler : IRequestHandler<PerformanceTest, Response<long>>
+        internal class PerformanceTestHandler : IRequestHandler<PerformanceTest, Response<long>>
         {
             private readonly IMediator _mediator;
 

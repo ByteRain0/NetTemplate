@@ -7,7 +7,7 @@ namespace PoC.Searching.Engine.Host.Bootstrappers
 {
     public static class EngineBootstrapper
     {
-        public static void ConfigureSearchingEngine(this IServiceCollection services)
+        public static void AddSearchingEngine(this IServiceCollection services)
         {
             services.AddMediatR(typeof(EngineBootstrapper).Assembly);
             services.AddTransient<ISearchEngine, SearchServiceStub>();

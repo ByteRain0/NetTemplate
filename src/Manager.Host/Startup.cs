@@ -1,6 +1,7 @@
 using BlobStorage.Accessor.Host.Bootstrappers;
 using ExecutionPipeline.Bootstrapper;
 using History.Accessor.Host.Bootstrappers;
+using Localization.Accessor.Infrastructure.Bootstrapper;
 using Manager.Host.Bootstrappers;
 using Manager.Service.Bootstrappers;
 using MessageDispatcher.Host.Bootstrapper;
@@ -26,14 +27,15 @@ namespace Manager.Host
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureSwagger();
-            services.ConfigureEventHistory(Configuration);
-            services.ConfigureExecutionPipeline();
-            services.ConfigureManagerServices();
-            services.ConfigureSearchingEngine();
-            services.ConfigureSessionAccessors();
-            services.ConfigureMessageDispatcher(Configuration);
-            services.ConfigureBlobStorage(Configuration);
+            services.AddEventHistory(Configuration);
+            services.AddExecutionPipeline();
+            services.AddManagerServices();
+            services.AddSearchingEngine();
+            services.AddSessionAccessors();
+            services.AddMessageDispatcher(Configuration);
+            services.AddBlobStorage(Configuration);
+            services.AddCustomLocalization(Configuration);
+            services.AddSwagger();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -44,7 +46,8 @@ namespace Manager.Host
             }
 
             app.ApplyEventHistoryMigrations();
-            app.ConfigureSwagger();
+            
+            app.AddSwagger();
             
             app.UseVoyagerExceptionHandler();
             app.UseHttpsRedirection();
@@ -52,15 +55,16 @@ namespace Manager.Host
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseLocalization();
 
-            app.ConfigureMessageDispatcher();
+            app.UseMessageDispatcher();
             
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapVoyager();
             });
             
-            app.EnableHealthChecks();
+            app.UseHealthChecks();
         }
     }
 }

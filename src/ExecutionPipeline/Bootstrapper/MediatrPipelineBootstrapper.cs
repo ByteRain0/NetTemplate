@@ -9,7 +9,7 @@ namespace ExecutionPipeline.Bootstrapper
 {
     public static class MediatrPipelineBootstrapper
     {
-        public static void ConfigureExecutionPipeline(this IServiceCollection services)
+        public static void AddExecutionPipeline(this IServiceCollection services)
         {
             services.AddMediatR(typeof(MediatrPipelineBootstrapper));
             //Log method call

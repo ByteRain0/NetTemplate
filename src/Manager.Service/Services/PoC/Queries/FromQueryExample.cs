@@ -14,7 +14,7 @@ namespace Manager.Service.Services.PoC.Queries
         [Voyager.Api.FromQuery("PropertyFromQuery")]
         public string PropertyFromQuery { get; set; }
         
-        public class FromQueryExampleHandler : IRequestHandler<FromQueryExample,Response>
+        internal class FromQueryExampleHandler : IRequestHandler<FromQueryExample,Response>
         {
             public Task<Response> Handle(FromQueryExample request, CancellationToken cancellationToken)
             {

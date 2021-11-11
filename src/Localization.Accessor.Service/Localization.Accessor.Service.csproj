@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>Localization.Accessor.Service</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Localization.Accessor.Contracts\Localization.Accessor.Contracts.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Scrutor" Version="3.3.0" />
+      <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
+    </ItemGroup>
+
+</Project>

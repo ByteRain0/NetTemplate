@@ -6,7 +6,7 @@ namespace Session.Accessor.Service.Host.Bootstrappers
 {
     public static class ExecutorExtractorBootstrapper
     {
-        public static void ConfigureSessionAccessors(this IServiceCollection services)
+        public static void AddSessionAccessors(this IServiceCollection services)
         {
             services.AddHttpContextAccessor();
             services.AddTransient<ISessionInfoExtractor, Service.SessionInfoExtractor>();

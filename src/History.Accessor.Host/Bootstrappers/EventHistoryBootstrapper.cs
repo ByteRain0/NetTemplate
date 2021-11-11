@@ -6,7 +6,6 @@ using History.Accessor.Contracts.Commands;
 using History.Accessor.Host.HealthChecks;
 using History.Accessor.Service.Infrastructure.DatabaseContext;
 using History.Accessor.Service.Service;
-using History.Accessor.Service.Service.Commands.RecordEvent;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +17,7 @@ namespace History.Accessor.Host.Bootstrappers
 {
     public static class EventHistoryBootstrapper
     {
-        public static void ConfigureEventHistory(this IServiceCollection services, IConfiguration config)
+        public static void AddEventHistory(this IServiceCollection services, IConfiguration config)
         {
             services.AddTransient<IHistoryContext, HistoryContext>();
             services.AddTransient<IHistoryAccessor, HistoryAccessor>();

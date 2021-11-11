@@ -6,13 +6,15 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="10.1.1" />
         <PackageReference Include="MediatR" Version="9.0.0" />
         <PackageReference Include="Voyager" Version="0.5.8" />
-        <PackageReference Include="Voyager" Version="0.5.8" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\History.Accessor.Contracts\History.Accessor.Contracts.csproj" />
+        <ProjectReference Include="..\Localization.Accessor.Contracts\Localization.Accessor.Contracts.csproj" />
         <ProjectReference Include="..\MessageDispater.Contracts\MessageDispater.Contracts.csproj" />
         <ProjectReference Include="..\SessionInfoExtractor\SessionInfoExtractor.csproj" />
         <ProjectReference Include="..\ExecutionPipeline\ExecutionPipeline.csproj" />
