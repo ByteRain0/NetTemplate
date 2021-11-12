@@ -29,12 +29,12 @@ namespace Manager.Host
         {
             services.AddEventHistory(Configuration);
             services.AddExecutionPipeline();
-            services.AddManagerServices();
             services.AddSearchingEngine();
             services.AddSessionAccessors();
             services.AddMessageDispatcher(Configuration);
             services.AddBlobStorage(Configuration);
             services.AddCustomLocalization(Configuration);
+            services.AddManagerServices();
             services.AddSwagger();
         }
 

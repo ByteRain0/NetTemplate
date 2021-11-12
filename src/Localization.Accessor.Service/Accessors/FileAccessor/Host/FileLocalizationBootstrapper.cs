@@ -10,8 +10,9 @@ namespace Localization.Accessor.Service.Accessors.FileAccessor.Host
         public static void AddFileLocalization(this IServiceCollection services, IConfiguration config)
         {
             services.Configure<FileLocalizationConfig>(config.GetSection("LocalizationConfig"));
-            services.AddTransient<IFileAccessor, Service.FileAccessor>();
-            services.Decorate<IFileAccessor, FileAccessorExceptionsHandler>();
+            services.AddTransient<IFileLocalizationsAccessor, Service.FileLocalizationsAccessor>();
+            services.Decorate<IFileLocalizationsAccessor, FileLocalizationsAccessorExceptionsHandler>();
+            services.Decorate<IFileLocalizationsAccessor, FileLocalizationsLocalizationsAccessorValidator>();
         }
     }
 }

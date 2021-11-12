@@ -20,7 +20,7 @@ namespace Localization.Accessor.Service.Accessors.FileAccessor.Service
     /// <summary>
     /// Accessor that works with specific files.
     /// </summary>
-    public partial class FileAccessor : IFileAccessor
+    public partial class FileLocalizationsAccessor : IFileLocalizationsAccessor
     {
         private readonly IHostingEnvironment _env;
         
@@ -30,7 +30,7 @@ namespace Localization.Accessor.Service.Accessors.FileAccessor.Service
 
         private readonly ILogger<FileAccess> _logger;
 
-        public FileAccessor(IHostingEnvironment env, IOptions<FileLocalizationConfig> locConfig, ILogger<FileAccess> logger)
+        public FileLocalizationsAccessor(IHostingEnvironment env, IOptions<FileLocalizationConfig> locConfig, ILogger<FileAccess> logger)
         {
             _env = env;
             _logger = logger;
@@ -81,7 +81,7 @@ namespace Localization.Accessor.Service.Accessors.FileAccessor.Service
             return Task.FromResult(Response.Fail<bool>("For this resource use the overload with the specific locale."));
         }
         
-        public Task<Response<bool>> IsResourceAvailable(IsAvailableQuery request, CancellationToken cancellationToken)
+        public Task<Response<bool>> IsResourceAvailable(IsResourceAvailableQuery request, CancellationToken cancellationToken)
         {
             try
             {

@@ -20,7 +20,7 @@ namespace Localization.Accessor.Infrastructure.Bootstrapper
             services.AddTransient<IStringLocalizer, LocalizationEngine>();
             services.AddTransient<ILocalizationConfigurationsAccessor, LocalizationEngine>();
             
-            services.Configure<LexemeStoreInformation>(config.GetSection("LocalizationConfig"));
+            services.Configure<LocalizationStoreInformation>(config.GetSection("LocalizationConfig"));
 
         }
 

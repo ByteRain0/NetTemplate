@@ -7,7 +7,7 @@ using Microsoft.Extensions.Localization;
 
 namespace Localization.Accessor.Service.Accessors.FileAccessor.Contracts
 {
-    public interface IFileAccessor : ILocalizationSourceAccessor
+    public interface IFileLocalizationsAccessor : ILocalizationSourceAccessor
     {
         /// <summary>
         /// Get all available localizations.
@@ -15,6 +15,6 @@ namespace Localization.Accessor.Service.Accessors.FileAccessor.Contracts
         /// <returns></returns>
         Task<Response<List<LocalizedString>>> GetLocalizations(GetLocalizationsQuery request, CancellationToken cancellationToken);
 
-        Task<Response<bool>> IsResourceAvailable(IsAvailableQuery request, CancellationToken cancellationToken);
+        Task<Response<bool>> IsResourceAvailable(IsResourceAvailableQuery request, CancellationToken cancellationToken);
     }
 }

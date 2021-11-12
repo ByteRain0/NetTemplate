@@ -38,7 +38,7 @@ namespace Localization.Accessor.Service.Accessors.CacheAccessor.Service
 
             if (string.IsNullOrEmpty(value))
             {
-                return Response.Fail<LocalizedString>(message: "Value not found", code: HttpStatusCode.NotFound);
+                return Response.Ok<LocalizedString>(default);
             }
 
             return Response.Ok(new LocalizedString(name: request.Key, value: value));

@@ -17,13 +17,13 @@ namespace Localization.Accessor.Service.Service
 {
     public partial class LocalizationEngine : IStringLocalizer
     {
-        private readonly IFileAccessor _fileLexemeAccessor;
+        private readonly IFileLocalizationsAccessor _fileLocalizationsLocalizationsAccessor;
 
         private readonly ICacheLocalizationAccessor _cacheLocalization;
 
         private readonly ILogger<LocalizationEngine> _logger;
 
-        private readonly IOptions<LexemeStoreInformation> _lexemesStore;
+        private readonly IOptions<LocalizationStoreInformation> _localizationsStore;
 
         private string _currentLanguage;
 
@@ -34,23 +34,23 @@ namespace Localization.Accessor.Service.Service
         private const string _cacheChekLanguage = "EN";
 
         public LocalizationEngine(
-            IFileAccessor fileLexemeAccessor,
+            IFileLocalizationsAccessor fileLocalizationsLocalizationsAccessor,
             ICacheLocalizationAccessor cacheLocalization,
-            ILogger<LocalizationEngine> logger, IOptions<LexemeStoreInformation> lexemesStore)
+            ILogger<LocalizationEngine> logger, IOptions<LocalizationStoreInformation> localizationsStore)
         {
-            _fileLexemeAccessor = fileLexemeAccessor;
+            _fileLocalizationsLocalizationsAccessor = fileLocalizationsLocalizationsAccessor;
             _cacheLocalization = cacheLocalization;
             _logger = logger;
-            _lexemesStore = lexemesStore;
+            _localizationsStore = localizationsStore;
 
             _cacheLocalization.GetLanguagePreference(CancellationToken.None)
                 .Result
                 .Act(onSuccess: result => { _currentLanguage = result.ToUpperInvariant()[..2]; });
 
 
-            if (_currentLanguage.Length == 2 && _currentLanguage != _lexemesStore.Value.DefaultLanguage)
+            if (_currentLanguage.Length == 2 && _currentLanguage != _localizationsStore.Value.DefaultLanguage)
             {
-                _currentLanguage = _lexemesStore.Value.Locales
+                _currentLanguage = _localizationsStore.Value.Locales
                     .FirstOrDefault(x => x.Name.ToUpperInvariant() == _currentLanguage)?.Name;
             }
         }
@@ -67,10 +67,10 @@ namespace Localization.Accessor.Service.Service
                     Value = "checkTranslationValue"
                 }, cancellationToken: CancellationToken.None);
 
-            foreach (var lang in _lexemesStore.Value.Locales)
+            foreach (var lang in _localizationsStore.Value.Locales)
             {
-                var fileExists = _fileLexemeAccessor.IsResourceAvailable(
-                    request: new IsAvailableQuery()
+                var fileExists = _fileLocalizationsLocalizationsAccessor.IsResourceAvailable(
+                    request: new IsResourceAvailableQuery()
                     {
                         Locale = lang.Name
                     },
@@ -84,7 +84,7 @@ namespace Localization.Accessor.Service.Service
                 if (fileExists.Value)
                 {
                     var fileLocalizations =
-                        _fileLexemeAccessor.GetLocalizations(new GetLocalizationsQuery()
+                        _fileLocalizationsLocalizationsAccessor.GetLocalizations(new GetLocalizationsQuery()
                         {
                             Locale = lang.Name
                         }, CancellationToken.None).Result;
@@ -125,15 +125,15 @@ namespace Localization.Accessor.Service.Service
         {
             get
             {
-                //Check if the dictionaries language was cached was cached.
-                Response cachedTranslationCheck = _cacheLocalization.GetLocalizedString(
+                //Check if the localization dictionaries were cached by checking on the default localization marker.
+                Response<LocalizedString> cachedTranslationCheck = _cacheLocalization.GetLocalizedString(
                     request: new GetLocalizationQuery()
                     {
                         Key = _cacheChekKey,
                         Locale = _cacheChekLanguage
                     }, cancellationToken: CancellationToken.None).Result;
 
-                if (cachedTranslationCheck.IsFailure)
+                if (cachedTranslationCheck.IsSuccess && cachedTranslationCheck.Value != null)
                 {
                     GetAllStrings(false);
                 }
@@ -146,7 +146,7 @@ namespace Localization.Accessor.Service.Service
                             Locale = _currentLanguage
                         }, cancellationToken: CancellationToken.None).Result;
 
-                if (cachedTranslation.IsSuccess)
+                if (cachedTranslation.IsSuccess && cachedTranslation.Value != null)
                 {
                     return new LocalizedString(
                         name: name,
@@ -154,14 +154,10 @@ namespace Localization.Accessor.Service.Service
                         resourceNotFound: false,
                         searchedLocation: _cache);
                 }
-                else if (cachedTranslation.IsFailure &&
-                         cachedTranslation.ResponseCode != ((int)HttpStatusCode.NotFound).ToString())
+                else if (cachedTranslation.IsFailure)
                 {
-                    _logger.LogCritical(
-                        $"Error encountered during fetch of cached lexeme for key :'{name}' , error : '{cachedTranslation.StackTrace}'");
+                    _logger.LogCritical(message:$"Error encountered during fetch of cached lexeme for key :'{name}' , error : '{cachedTranslation.StackTrace}'");
                 }
-
-
                 return new LocalizedString(name, $"[{name}]", true);
             }
         }
@@ -172,10 +168,10 @@ namespace Localization.Accessor.Service.Service
             {
                 if (arguments.Length == 1 && (arguments[0] is string))
                 {
-                    _currentLanguage = arguments.First().ToString().ToUpperInvariant()[..2];
-                    if (_currentLanguage.Length == 2 && _currentLanguage != _lexemesStore.Value.DefaultLanguage)
+                    _currentLanguage = arguments.First().ToString()?.ToUpperInvariant()[..2];
+                    if (_currentLanguage.Length == 2 && _currentLanguage != _localizationsStore.Value.DefaultLanguage)
                     {
-                        _currentLanguage = _lexemesStore.Value.Locales
+                        _currentLanguage = _localizationsStore.Value.Locales
                             .FirstOrDefault(x => x.Name.ToUpperInvariant() == _currentLanguage)?.Name;
                     }
                     return this[name];
@@ -187,7 +183,7 @@ namespace Localization.Accessor.Service.Service
 
                     if (!string.IsNullOrWhiteSpace(defaultValueParam.Language))
                     {
-                        _currentLanguage = _lexemesStore.Value.Locales
+                        _currentLanguage = _localizationsStore.Value.Locales
                             .FirstOrDefault(x => x.Name.ToUpperInvariant() == defaultValueParam.Language)?.Name;
                     }
 

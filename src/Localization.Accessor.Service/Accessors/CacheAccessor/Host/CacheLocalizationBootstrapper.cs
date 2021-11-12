@@ -12,6 +12,7 @@ namespace Localization.Accessor.Service.Accessors.CacheAccessor.Host
             services.Configure<CacheLocalizationConfig>(config.GetSection("LocalizationConfig"));
             services.AddTransient<ICacheLocalizationAccessor, Service.CacheAccessor>();
             services.Decorate<ICacheLocalizationAccessor, CacheAccessorExceptionsHandler>();
+            services.Decorate<ICacheLocalizationAccessor, CacheLocalizationValidator>();
             services.AddHttpContextAccessor();
             services.AddDistributedMemoryCache().AddSession();
         }

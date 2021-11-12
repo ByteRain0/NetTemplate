@@ -10,13 +10,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Localization.Accessor.Service.Accessors.FileAccessor.Service
 {
-    public class FileAccessorExceptionsHandler : IFileAccessor
+    public class FileLocalizationsAccessorExceptionsHandler : IFileLocalizationsAccessor
     {
-        private readonly IFileAccessor _instance;
+        private readonly IFileLocalizationsAccessor _instance;
 
-        private readonly ILogger<FileAccessorExceptionsHandler> _logger;
+        private readonly ILogger<FileLocalizationsAccessorExceptionsHandler> _logger;
 
-        public FileAccessorExceptionsHandler(ILogger<FileAccessorExceptionsHandler> logger, IFileAccessor instance)
+        public FileLocalizationsAccessorExceptionsHandler(ILogger<FileLocalizationsAccessorExceptionsHandler> logger, IFileLocalizationsAccessor instance)
         {
             _logger = logger;
             _instance = instance;
@@ -100,7 +100,7 @@ namespace Localization.Accessor.Service.Accessors.FileAccessor.Service
             }
         }
 
-        public async Task<Response<bool>> IsResourceAvailable(IsAvailableQuery request, CancellationToken cancellationToken)
+        public async Task<Response<bool>> IsResourceAvailable(IsResourceAvailableQuery request, CancellationToken cancellationToken)
         {
             try
             {

@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace Localization.Accessor.Service.Accessors.FileAccessor.Contracts
 {
-    public class IsAvailableQueryValidator : AbstractValidator<IsAvailableQuery>
+    public class IsAvailableQueryValidator : AbstractValidator<IsResourceAvailableQuery>
     {
         public IsAvailableQueryValidator()
         {

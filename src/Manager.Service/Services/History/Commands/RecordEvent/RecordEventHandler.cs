@@ -10,15 +10,13 @@ using Voyager;
 
 namespace Manager.Service.Services.History.Commands.RecordEvent
 {
-    internal class RecordEventHandler : IRequestHandler<RecordEvent, Response>, IInjectHttpContext
+    internal class RecordEventHandler : IRequestHandler<RecordEvent, Response>
     {
         private readonly IHistoryAccessor _historyAccessor;
 
         private readonly IMapper _mapper;
         
-        public HttpContext HttpContext { get; set; }
-        
-        public RecordEventHandler(IHistoryAccessor historyAccessor, IMapper mapper)
+        internal RecordEventHandler(IHistoryAccessor historyAccessor, IMapper mapper)
         {
             _historyAccessor = historyAccessor;
             _mapper = mapper;
@@ -26,7 +24,6 @@ namespace Manager.Service.Services.History.Commands.RecordEvent
 
         public async Task<Response> Handle(RecordEvent request, CancellationToken cancellationToken)
         {
-            throw new InvalidOperationException("SomeException");
             var act = await _historyAccessor.RecordEvent(_mapper.Map<global::History.Accessor.Contracts.Commands.RecordEvent>(request), cancellationToken);
             return act;
         }

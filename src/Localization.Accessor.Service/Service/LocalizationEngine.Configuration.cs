@@ -13,7 +13,7 @@ namespace Localization.Accessor.Service.Service
     {
         public async Task<Response<HashSet<Locale>>> GetAvailableLocales()
         {
-            return Response.Ok(_lexemesStore.Value.Locales);
+            return Response.Ok(_localizationsStore.Value.Locales);
         }
 
         public Task<Response<string>> DefaultLocale()
