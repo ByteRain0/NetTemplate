@@ -24,11 +24,14 @@ namespace History.Accessor.Host.Bootstrappers
             services.AddMediatR(typeof(HistoryAccessor));
             
             FluentValidation.ServiceCollectionExtensions.AddValidatorsFromAssemblies(services, 
-                new List<Assembly>(){typeof(RecordEvent).Assembly});
+                new List<Assembly>()
+                {
+                    typeof(HistoryContext).Assembly
+                });
             
             services.AddAutoMapper(c =>
             {
-                c.AddMaps(new List<Assembly>() {typeof(RecordEvent).Assembly});
+                c.AddMaps(new List<Assembly>() {typeof(HistoryContext).Assembly});
             });
             
             services.AddDbContext<HistoryContext>(
