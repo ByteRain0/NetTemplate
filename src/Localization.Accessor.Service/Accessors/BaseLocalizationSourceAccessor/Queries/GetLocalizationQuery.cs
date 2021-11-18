@@ -1,6 +1,4 @@
-using System.Data;
-
-namespace Localization.Accessor.Service.Accessors.BaseLocalizationSourceAccessor
+namespace Localization.Accessor.Service.Accessors.BaseLocalizationSourceAccessor.Queries
 {
     public class GetLocalizationQuery
     {

@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using History.Accessor.Contracts;
+using History.Accessor.Contracts.DTO_s;
 using History.Accessor.Service.Infrastructure.DatabaseContext;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

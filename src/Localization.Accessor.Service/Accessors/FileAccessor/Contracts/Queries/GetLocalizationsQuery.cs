@@ -1,4 +1,4 @@
-namespace Localization.Accessor.Service.Accessors.FileAccessor.Contracts
+namespace Localization.Accessor.Service.Accessors.FileAccessor.Contracts.Queries
 {
     public class GetLocalizationsQuery
     {

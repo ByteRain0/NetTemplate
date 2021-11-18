@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
+using History.Accessor.Contracts.DTO_s;
 using MediatR;
 
 namespace History.Accessor.Contracts.Queries

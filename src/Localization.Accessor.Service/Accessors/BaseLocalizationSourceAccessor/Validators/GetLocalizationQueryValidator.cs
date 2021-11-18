@@ -1,6 +1,7 @@
 using FluentValidation;
+using Localization.Accessor.Service.Accessors.BaseLocalizationSourceAccessor.Queries;
 
-namespace Localization.Accessor.Service.Accessors.BaseLocalizationSourceAccessor
+namespace Localization.Accessor.Service.Accessors.BaseLocalizationSourceAccessor.Validators
 {
     public class GetLocalizationQueryValidator : AbstractValidator<GetLocalizationQuery>
     {

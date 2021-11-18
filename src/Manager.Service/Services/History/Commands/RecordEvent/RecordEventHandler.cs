@@ -10,13 +10,13 @@ using Voyager;
 
 namespace Manager.Service.Services.History.Commands.RecordEvent
 {
-    internal class RecordEventHandler : IRequestHandler<RecordEvent, Response>
+    public class RecordEventHandler : IRequestHandler<RecordEvent, Response>
     {
         private readonly IHistoryAccessor _historyAccessor;
 
         private readonly IMapper _mapper;
         
-        internal RecordEventHandler(IHistoryAccessor historyAccessor, IMapper mapper)
+        public RecordEventHandler(IHistoryAccessor historyAccessor, IMapper mapper)
         {
             _historyAccessor = historyAccessor;
             _mapper = mapper;

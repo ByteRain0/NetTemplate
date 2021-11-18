@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using History.Accessor.Contracts.Commands;
+using History.Accessor.Contracts.DTO_s;
 using History.Accessor.Contracts.Queries;
 
 namespace History.Accessor.Contracts

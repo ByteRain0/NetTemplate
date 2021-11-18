@@ -1,6 +1,6 @@
 using System;
 
-namespace Localization.Accessor.Service.Accessors.CacheAccessor.Service
+namespace Localization.Accessor.Service.Accessors.BaseLocalizationSourceAccessor.Utilities
 {
     public static class LocaleHelpers
     {

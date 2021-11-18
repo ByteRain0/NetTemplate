@@ -1,6 +1,7 @@
 using FluentValidation;
+using Localization.Accessor.Service.Accessors.FileAccessor.Contracts.Queries;
 
-namespace Localization.Accessor.Service.Accessors.FileAccessor.Contracts
+namespace Localization.Accessor.Service.Accessors.FileAccessor.Contracts.Validators
 {
     public class GetLocalizationsQueryValidator : AbstractValidator<GetLocalizationsQuery>
     {

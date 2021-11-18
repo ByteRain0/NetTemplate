@@ -1,35 +1,71 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using BlobStorage.Accessor.Contracts;
-using BlobStorage.Accessor.Service.Infrastructure.Configurations;
+using BlobStorage.Accessor.Contracts.Commands;
+using BlobStorage.Accessor.Contracts.Queries;
+using BlobStorage.Accessor.Contracts.Utilities;
+using BlobStorage.Accessor.Service.Host.Configurations;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace BlobStorage.Accessor.Service.Service
 {
-    public class AzureStorageAccessor : IStorageService
+    public class AzureStorageAccessor : IStorageAccessor
     {
-        private readonly AzureStorageConfigs _options;
+        private BlobContainerClient _blobContainer;
 
-        public AzureStorageAccessor(IOptions<AzureStorageConfigs> options)
+        
+        public AzureStorageAccessor(IOptions<AzureStorageConfigs> options, ILogger<AzureStorageAccessor> logger)
         {
-            _options = options.Value;
+            _blobContainer = new BlobServiceClient(options.Value.ConnectionString)
+                .GetBlobContainerClient(options.Value.ContainerName.ToLowerInvariant());
+            _blobContainer.CreateIfNotExists();
         }
 
-        public Task<Response> Upload()
+        public async Task<Response> Upload(UploadContentCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            if (!request.Stream.IsBase64String())
+            {
+                request.Stream = request.Stream.EncodeToBase64();
+            }
+
+            BlobClient blobClient = _blobContainer.GetBlobClient($"{request.CustomPath}/{request.FileName}");
+
+            byte[] data = Encoding.ASCII.GetBytes(request.Stream);
+
+            await using (var stream = new MemoryStream(data, writable: false))
+            {
+                var operation = await blobClient.UploadAsync(stream,
+                    new BlobHttpHeaders()
+                    {
+                        ContentType = request.ContentType
+                    },
+                    request.Tags, cancellationToken: cancellationToken);
+            }
+            return Response.Ok();
         }
 
-        public Task<Response<byte[]>> Download()
+        public async Task<Response<string>> Download(DownloadContentQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
-        }
+            BlobClient blob = _blobContainer.GetBlobClient(request.GetSingleFilePath);
+            
+            BlobDownloadInfo blobData = await blob.DownloadAsync(cancellationToken:cancellationToken);
 
-        public Task<Response<List<string>>> ListContents()
-        {
-            throw new NotImplementedException();
+            StreamReader reader = new StreamReader(blobData.Content);
+            string result = await reader.ReadToEndAsync();
+
+            if (result.IsBase64String())
+            {
+                return Response.Ok(value:result);
+            }
+
+            return Response.Ok(value:result.EncodeToBase64());
         }
     }
 }

@@ -4,6 +4,7 @@ using AutoMapper;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using History.Accessor.Contracts;
 using History.Accessor.Contracts.Commands;
+using History.Accessor.Contracts.DTO_s;
 using History.Accessor.Contracts.Queries;
 using History.Accessor.Service.Service.Commands.RecordEvent;
 using History.Accessor.Service.Service.Queries.CountEvents;

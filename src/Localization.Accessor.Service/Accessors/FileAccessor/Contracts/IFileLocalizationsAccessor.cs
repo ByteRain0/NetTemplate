@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using Localization.Accessor.Service.Accessors.BaseLocalizationSourceAccessor;
+using Localization.Accessor.Service.Accessors.FileAccessor.Contracts.Queries;
 using Microsoft.Extensions.Localization;
 
 namespace Localization.Accessor.Service.Accessors.FileAccessor.Contracts

@@ -1,4 +1,4 @@
-namespace Localization.Accessor.Service.Accessors.BaseLocalizationSourceAccessor
+namespace Localization.Accessor.Service.Accessors.BaseLocalizationSourceAccessor.Commands
 {
     public class RemoveLocalizationCommand
     {

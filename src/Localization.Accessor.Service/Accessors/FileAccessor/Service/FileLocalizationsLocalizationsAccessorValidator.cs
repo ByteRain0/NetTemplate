@@ -5,7 +5,12 @@ using System.Threading.Tasks;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using FluentValidation;
 using Localization.Accessor.Service.Accessors.BaseLocalizationSourceAccessor;
+using Localization.Accessor.Service.Accessors.BaseLocalizationSourceAccessor.Commands;
+using Localization.Accessor.Service.Accessors.BaseLocalizationSourceAccessor.Queries;
+using Localization.Accessor.Service.Accessors.BaseLocalizationSourceAccessor.Validators;
 using Localization.Accessor.Service.Accessors.FileAccessor.Contracts;
+using Localization.Accessor.Service.Accessors.FileAccessor.Contracts.Queries;
+using Localization.Accessor.Service.Accessors.FileAccessor.Contracts.Validators;
 using Microsoft.Extensions.Localization;
 
 namespace Localization.Accessor.Service.Accessors.FileAccessor.Service
