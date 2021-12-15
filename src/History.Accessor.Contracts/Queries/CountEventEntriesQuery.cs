@@ -4,7 +4,7 @@ using MediatR;
 
 namespace History.Accessor.Contracts.Queries
 {
-    public class CountEventEntries : IRequest<Response<int>>, IRetryMarker
+    public class CountEventEntriesQuery : IRequest<Response<int>>, IRetryMarker
     {
         //
     }

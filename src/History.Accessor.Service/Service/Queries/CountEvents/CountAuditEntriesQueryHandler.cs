@@ -8,16 +8,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace History.Accessor.Service.Service.Queries.CountEvents
 {
-    internal class CountAuditEntriesHandler : IRequestHandler<CountEventEntries, Response<int>>
+    internal class CountAuditEntriesQueryHandler : IRequestHandler<CountEventEntriesQuery, Response<int>>
     {
         private readonly IHistoryContext _context;
 
-        public CountAuditEntriesHandler(IHistoryContext context)
+        public CountAuditEntriesQueryHandler(IHistoryContext context)
         {
             _context = context;
         }
 
-        public async Task<Response<int>> Handle(CountEventEntries request, CancellationToken cancellationToken)
+        public async Task<Response<int>> Handle(CountEventEntriesQuery request, CancellationToken cancellationToken)
         {
             return Response.Ok(await _context.Events.CountAsync(CancellationToken.None));
         }

@@ -1,16 +1,14 @@
 using AutoMapper;
 using History.Accessor.Contracts;
+using History.Accessor.Contracts.Commands;
 
-namespace Manager.Service.Services.History.Commands.RecordEvent
+namespace Manager.Service.Services.History.Commands.RecordEvent;
+
+public class RecordEventToEventDtoProfile : Profile
 {
-    public class RecordEventToEventDtoProfile : Profile
+    public RecordEventToEventDtoProfile()
     {
-        public RecordEventToEventDtoProfile()
-        {
-            CreateMap<RecordEvent, global::History.Accessor.Contracts.Commands.RecordEvent>()
-                .ForMember(x => x.UserId, src => src.Ignore())
-                .ForMember(x => x.UserName, src => src.Ignore())
-                .ReverseMap();
-        }
+        CreateMap<RecordEvent, RecordEventCommand>()
+            .ReverseMap();
     }
 }

@@ -2,13 +2,12 @@
 using Hangfire;
 using Hangfire.PostgreSql;
 using History.Accessor.Host.Bootstrappers;
-using Manager.Service.Bootstrappers;
+using Manager.Host.Bootstrappers;
 using MessageDispatcher.Contracts;
 using MessageDispatcher.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PoC.Searching.Engine.Host.Bootstrappers;
 using Session.Accessor.Service.Host.Bootstrappers;
 
 namespace MessageDispatcher.Worker
@@ -35,7 +34,6 @@ namespace MessageDispatcher.Worker
                     services.AddManagerServices();
                     services.AddExecutionPipeline();
                     services.AddEventHistory(serviceConfiguration);
-                    services.AddSearchingEngine();
                     services.AddSessionAccessors();
                     services.AddTransient<IMessageDispatcher, HangFireDispatcher>();
                     

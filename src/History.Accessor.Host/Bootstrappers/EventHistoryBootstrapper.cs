@@ -35,7 +35,7 @@ namespace History.Accessor.Host.Bootstrappers
             });
             
             services.AddDbContext<HistoryContext>(
-                opts => opts.UseNpgsql(config["DatabaseConnectionString"])
+                opts => opts.UseSqlServer(config.GetConnectionString("DefaultConnection"))
             );
             
             var hcBuilder = services.AddHealthChecks();

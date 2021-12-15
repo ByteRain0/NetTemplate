@@ -1,14 +1,13 @@
 using AutoMapper;
 using BlobStorage.Accessor.Contracts.Commands;
 
-namespace Manager.Service.Services.Blobs.Commands.UploadBlob
+namespace Manager.Service.Services.Blobs.Commands.UploadBlob;
+
+public class UploadBlobProfile : Profile
 {
-    public class UploadBlobProfile : Profile
+    public UploadBlobProfile()
     {
-        public UploadBlobProfile()
-        {
-            CreateMap<UploadBlob, UploadContentCommand>()
-                .ReverseMap();
-        }
+        CreateMap<UploadBlob, UploadContentCommand>()
+            .ReverseMap();
     }
 }

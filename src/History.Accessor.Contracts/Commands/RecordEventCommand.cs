@@ -5,7 +5,7 @@ using MediatR;
 
 namespace History.Accessor.Contracts.Commands
 {
-    public class RecordEvent : EventDto, IRequest<Response>, IRetryMarker
+    public class RecordEventCommand : EventDTO, IRequest<Response>, IRetryMarker
     {
     }
 }

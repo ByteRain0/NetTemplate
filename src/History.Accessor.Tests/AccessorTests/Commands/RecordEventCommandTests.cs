@@ -22,7 +22,7 @@ namespace History.Accessor.Tests.AccessorTests.Commands
         public async Task CommandShouldBeValidated()
         {
             //Assert
-            var command = new RecordEvent();
+            var command = new RecordEventCommand();
             var mediatr = GetService<IMediator>();
 
             //Act

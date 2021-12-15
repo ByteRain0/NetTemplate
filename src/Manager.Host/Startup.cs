@@ -3,14 +3,12 @@ using ExecutionPipeline.Bootstrapper;
 using History.Accessor.Host.Bootstrappers;
 using Localization.Accessor.Infrastructure.Bootstrapper;
 using Manager.Host.Bootstrappers;
-using Manager.Service.Bootstrappers;
 using MessageDispatcher.Host.Bootstrapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PoC.Searching.Engine.Host.Bootstrappers;
 using Session.Accessor.Service.Host.Bootstrappers;
 using Voyager;
 
@@ -29,7 +27,6 @@ namespace Manager.Host
         {
             services.AddEventHistory(Configuration);
             services.AddExecutionPipeline();
-            services.AddSearchingEngine();
             services.AddSessionAccessors();
             services.AddMessageDispatcher(Configuration);
             services.AddBlobStorage(Configuration);

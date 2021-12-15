@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.Reflection;
-using AutoMapper;
 using Manager.Service.Services.History.Commands.RecordEvent;
 using Microsoft.Extensions.DependencyInjection;
 using Voyager;
 
-namespace Manager.Service.Bootstrappers
+namespace Manager.Host.Bootstrappers
 {
     public static class OrchestraManagerBootstrapper
     {

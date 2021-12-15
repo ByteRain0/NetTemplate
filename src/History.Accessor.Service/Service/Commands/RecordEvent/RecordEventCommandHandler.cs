@@ -10,19 +10,19 @@ using Newtonsoft.Json;
 
 namespace History.Accessor.Service.Service.Commands.RecordEvent
 {
-    internal class RecordEventHandler : IRequestHandler<Contracts.Commands.RecordEvent, Response>
+    internal class RecordEventCommandHandler : IRequestHandler<Contracts.Commands.RecordEventCommand, Response>
     {
         private readonly IHistoryContext _context;
 
-        private readonly ILogger<RecordEventHandler> _logger;
+        private readonly ILogger<RecordEventCommandHandler> _logger;
 
-        public RecordEventHandler(IHistoryContext context, ILogger<RecordEventHandler> logger)
+        public RecordEventCommandHandler(IHistoryContext context, ILogger<RecordEventCommandHandler> logger)
         {
             _context = context;
             _logger = logger;
         }
 
-        public async Task<Response> Handle(Contracts.Commands.RecordEvent model, CancellationToken cancellationToken)
+        public async Task<Response> Handle(Contracts.Commands.RecordEventCommand model, CancellationToken cancellationToken)
         {
             EventDataModel eventDataModel = new EventDataModel(
                 message: model.Message,

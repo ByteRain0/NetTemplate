@@ -16,7 +16,7 @@ namespace MessageDispatcher.Host.Bootstrapper
             services.AddTransient<IMessageDispatcher, HangFireDispatcher>();
             services.AddHangfire(hangFireConfiguration =>
             {
-                hangFireConfiguration.UsePostgreSqlStorage(configuration["DatabaseConnectionString"]);
+                hangFireConfiguration.UseSqlServerStorage(configuration.GetConnectionString("DefaultConnection"));
                 hangFireConfiguration.UseMediatR();
             });
             return services;

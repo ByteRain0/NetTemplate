@@ -5,13 +5,14 @@
     Aka: DI configuration, Infrastructure bits etc.
     -->
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <RootNamespace>History.Accessor.Host</RootNamespace>
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
         <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
     </ItemGroup>
 
     <ItemGroup>

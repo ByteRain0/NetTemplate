@@ -1,21 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <RootNamespace>MessageDispatcher</RootNamespace>
     </PropertyGroup>
 
 
 
     <ItemGroup>
-        <PackageReference Include="Hangfire.AspNetCore" Version="1.8.0-beta3" />
-        <PackageReference Include="Hangfire.PostgreSql" Version="1.8.6" />
+        <PackageReference Include="Hangfire.AspNetCore" Version="1.8.0-beta4" />
+        <PackageReference Include="Hangfire.PostgreSql" Version="1.9.4" />
+        <PackageReference Include="Hangfire.SqlServer" Version="1.8.0-beta4" />
         <PackageReference Include="MediatR" Version="9.0.0" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
         <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-        <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-        <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
     </ItemGroup>
     
     <ItemGroup>

@@ -1,22 +1,27 @@
 using FluentValidation;
 
-namespace Manager.Service.Services.History.Commands.RecordEvent
+namespace Manager.Service.Services.History.Commands.RecordEvent;
+
+public class RecordEventValidator : AbstractValidator<RecordEvent>
 {
-    public class RecordEventValidator : AbstractValidator<RecordEvent>
+    public RecordEventValidator()
     {
-        public RecordEventValidator()
-        {
-            RuleFor(x => x.Message)
-                .NotEmpty();
+        RuleFor(x => x.Message)
+            .NotEmpty();
 
-            RuleFor(x => x.EntityType)
-                .NotEmpty();
+        RuleFor(x => x.EntityType)
+            .NotEmpty();
 
-            RuleFor(x => x.EntityPrimaryKey)
-                .NotEmpty();
+        RuleFor(x => x.EntityPrimaryKey)
+            .NotEmpty();
 
-            RuleFor(x => x.EventName)
-                .NotEmpty();
-        }
+        RuleFor(x => x.EventName)
+            .NotEmpty();
+
+        RuleFor(x => x.UserId)
+            .NotEmpty();
+
+        RuleFor(x => x.UserName)
+            .NotEmpty();
     }
 }

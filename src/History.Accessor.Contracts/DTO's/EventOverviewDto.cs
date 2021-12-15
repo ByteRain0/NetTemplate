@@ -4,7 +4,7 @@ namespace History.Accessor.Contracts.DTO_s
 {
     public class EventOverviewDto
     {
-        public List<EventDto> Events { get; set; }
+        public List<EventDTO> Events { get; set; }
 
         public int Count { get; set; }
     }

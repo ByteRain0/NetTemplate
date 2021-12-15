@@ -2,9 +2,9 @@ using FluentValidation;
 
 namespace History.Accessor.Service.Service.Commands.RecordEvent
 {
-    public class RecordEventValidator : AbstractValidator<Contracts.Commands.RecordEvent>
+    public class RecordEventCommandValidator : AbstractValidator<Contracts.Commands.RecordEventCommand>
     {
-        public RecordEventValidator()
+        public RecordEventCommandValidator()
         {
             RuleFor(x => x.Message)
                 .NotEmpty();

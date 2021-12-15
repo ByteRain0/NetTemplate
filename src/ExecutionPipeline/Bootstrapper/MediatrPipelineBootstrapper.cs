@@ -13,7 +13,7 @@ namespace ExecutionPipeline.Bootstrapper
         {
             services.AddMediatR(typeof(MediatrPipelineBootstrapper));
             //Log method call
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestLogger<>));
+            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestLogger<>));
             //Start a timer to determine if the request is a long running one.
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceMiddleware<,>));
             //Make sure the execution is safe.

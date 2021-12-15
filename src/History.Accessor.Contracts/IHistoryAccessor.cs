@@ -14,8 +14,8 @@ namespace History.Accessor.Contracts
     {
         Task<Response<EventOverviewDto>> GetEvents(GetEventsQuery query, CancellationToken cancellationToken);
 
-        Task<Response> RecordEvent(RecordEvent request, CancellationToken cancellationToken);
+        Task<Response> RecordEvent(RecordEventCommand request, CancellationToken cancellationToken);
 
-        Task<Response<int>> CountEvents(CountEventEntries request, CancellationToken cancellationToken);
+        Task<Response<int>> CountEvents(CountEventEntriesQuery request, CancellationToken cancellationToken);
     }
 }

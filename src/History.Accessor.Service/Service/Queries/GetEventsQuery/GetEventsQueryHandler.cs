@@ -34,7 +34,7 @@ namespace History.Accessor.Service.Service.Queries.GetEventsQuery
             var entriesList = await entriesQuery
                 .Skip(request.Skip)
                 .Take(request.Take)
-                .Select(x => new EventDto()
+                .Select(x => new EventDTO()
                 {
                     Id = x.Id,
                     Message = x.Message,

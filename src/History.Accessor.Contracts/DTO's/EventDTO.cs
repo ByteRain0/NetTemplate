@@ -2,7 +2,7 @@ using System;
 
 namespace History.Accessor.Contracts.DTO_s
 {
-    public class EventDto
+    public class EventDTO
     {
         public Guid Id { get; set; }
         

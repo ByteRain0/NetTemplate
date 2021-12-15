@@ -15,10 +15,10 @@ namespace AzureKeyVault.Host.Bootstrapper
                 var clientId = root["KeyVault:ClientId"];
                 var clientSecret = root["KeyVault:ClientSecret"];
 
-                builder.AddAzureKeyVault(vault: $"https://{vaultName}.vault.azure.net/",
-                    clientId: clientId,
-                    clientSecret: clientSecret,
-                    new PrefixKeyVaultSecretManager(root["KeyVault:AppPrefix"]));
+                // builder.AddAzureKeyVault(vault: $"https://{vaultName}.vault.azure.net/",
+                //     clientId: clientId,
+                //     clientSecret: clientSecret,
+                //     new PrefixKeyVaultSecretManager(root["KeyVault:AppPrefix"]));
             });
 
             return host;

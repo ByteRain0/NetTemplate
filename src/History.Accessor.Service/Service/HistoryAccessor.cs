@@ -33,7 +33,7 @@ namespace History.Accessor.Service.Service
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param> 
         /// <returns></returns>
-        public async Task<Response> RecordEvent(RecordEvent request, CancellationToken cancellationToken)
+        public async Task<Response> RecordEvent(RecordEventCommand request, CancellationToken cancellationToken)
         {
             var operation = await _mediator.Send(request:request,cancellationToken:cancellationToken);
             return operation;
@@ -45,7 +45,7 @@ namespace History.Accessor.Service.Service
             return operation;
         }
         
-        public async Task<Response<int>> CountEvents(CountEventEntries request, CancellationToken cancellationToken)
+        public async Task<Response<int>> CountEvents(CountEventEntriesQuery request, CancellationToken cancellationToken)
         {
             var operation = await _mediator.Send(request:request,cancellationToken:cancellationToken);
             return operation;
