@@ -6,45 +6,44 @@ using MediatR;
 using MessageDispatcher.Contracts;
 using Microsoft.Extensions.Logging;
 
-namespace MessageDispatcher.Infrastructure
+namespace MessageDispatcher.Infrastructure;
+
+public class HangFireDispatcher : IMessageDispatcher
 {
-    public class HangFireDispatcher : IMessageDispatcher
+    private readonly ILogger<HangFireDispatcher> _logger;
+
+    public HangFireDispatcher(ILogger<HangFireDispatcher> logger)
     {
-        private readonly ILogger<HangFireDispatcher> _logger;
+        _logger = logger;
+    }
 
-        public HangFireDispatcher(ILogger<HangFireDispatcher> logger)
+    public Response Dispatch(string jobIdentifier, IRequest request)
+    {
+        try
         {
-            _logger = logger;
+            var backgroundJobClient = new BackgroundJobClient();
+            backgroundJobClient.Enqueue<MediatRBridge>(x => x.Send(jobIdentifier,request));
+            return Response.Ok();
         }
-
-        public Response Dispatch(string jobIdentifier, IRequest request)
+        catch (Exception e)
         {
-            try
-            {
-                var backgroundJobClient = new BackgroundJobClient();
-                backgroundJobClient.Enqueue<MediatRBridge>(x => x.Send(jobIdentifier,request));
-                return Response.Ok();
-            }
-            catch (Exception e)
-            {
-                _logger.LogCritical(e,e.Message);
-                return Response.Fail(e.Message);
-            }
+            _logger.LogCritical(e,e.Message);
+            return Response.Fail(e.Message);
         }
+    }
 
-        public Response Dispatch<T>(string jobIdentifier, IRequest<T> request)
+    public Response Dispatch<T>(string jobIdentifier, IRequest<T> request)
+    {
+        try
         {
-            try
-            {
-                var backgroundJobClient = new BackgroundJobClient();
-                backgroundJobClient.Enqueue<MediatRBridge>(x => x.Send(jobIdentifier,request));
-                return Response.Ok();
-            }
-            catch (Exception e)
-            {
-                _logger.LogCritical(e,e.Message);
-                return Response.Fail(e.Message);
-            }
+            var backgroundJobClient = new BackgroundJobClient();
+            backgroundJobClient.Enqueue<MediatRBridge>(x => x.Send(jobIdentifier,request));
+            return Response.Ok();
+        }
+        catch (Exception e)
+        {
+            _logger.LogCritical(e,e.Message);
+            return Response.Fail(e.Message);
         }
     }
 }

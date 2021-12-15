@@ -1,11 +1,10 @@
-namespace BlobStorage.Accessor.Contracts.Queries
-{
-    public class DownloadContentQuery
-    {
-        public string FileName { get; set; }
-        
-        public string Path { get; set; }
+namespace BlobStorage.Accessor.Contracts.Queries;
 
-        public string GetSingleFilePath => $"{Path}/{FileName}";
-    }
+public class DownloadContentQuery
+{
+    public string FileName { get; set; }
+        
+    public string Path { get; set; }
+
+    public string GetSingleFilePath => $"{Path}/{FileName}";
 }

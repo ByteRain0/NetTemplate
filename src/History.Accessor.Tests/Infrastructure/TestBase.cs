@@ -9,75 +9,74 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace History.Accessor.Tests.Infrastructure
+namespace History.Accessor.Tests.Infrastructure;
+
+public class TestBase
 {
-    public class TestBase
+    public TestContext TestContext { get; set; }
+
+    protected static HistoryContext DatabaseContext { get; set; }
+
+    protected static IServiceProvider ServiceProvider { get; set; }
+
+    protected static IMapper Mapper { get; set; }
+        
+    public static void InitialSetup(TestContext context)
     {
-        public TestContext TestContext { get; set; }
-
-        protected static HistoryContext DatabaseContext { get; set; }
-
-        protected static IServiceProvider ServiceProvider { get; set; }
-
-        protected static IMapper Mapper { get; set; }
+        var cultureInfo = new CultureInfo("en-US");
+        CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+        CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+        ServiceProvider = ConfigureServices();
+        Mapper = ServiceProvider.GetService<IMapper>();
+        InitializeDatabase();
+    }
         
-        public static void InitialSetup(TestContext context)
-        {
-            var cultureInfo = new CultureInfo("en-US");
-            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
-            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-            ServiceProvider = ConfigureServices();
-            Mapper = ServiceProvider.GetService<IMapper>();
-            InitializeDatabase();
-        }
-        
-        public static IServiceProvider ConfigureServices()
-        {
-            var services = new ServiceCollection();
-            var configuration = InitConfiguration();
+    public static IServiceProvider ConfigureServices()
+    {
+        var services = new ServiceCollection();
+        var configuration = InitConfiguration();
 
-            services.AddEventHistory(configuration);
-            services.AddExecutionPipeline();
+        services.AddEventHistory(configuration);
+        services.AddExecutionPipeline();
             
-            var serviceProvider = services
-                .AddEntityFrameworkInMemoryDatabase()
-                .BuildServiceProvider();
+        var serviceProvider = services
+            .AddEntityFrameworkInMemoryDatabase()
+            .BuildServiceProvider();
 
-            services.AddDbContext<HistoryContext>(options =>
-            {
-                options.UseInMemoryDatabase("InMemoryHistoryDb");
-                options.UseInternalServiceProvider(serviceProvider);
-            });
+        services.AddDbContext<HistoryContext>(options =>
+        {
+            options.UseInMemoryDatabase("InMemoryHistoryDb");
+            options.UseInternalServiceProvider(serviceProvider);
+        });
             
-            return services
-                .AddLogging()
-                .BuildServiceProvider();
-        }
+        return services
+            .AddLogging()
+            .BuildServiceProvider();
+    }
         
-        private static void InitializeDatabase()
-        {
-            DatabaseContext = ServiceProvider.GetRequiredService<HistoryContext>();
-            DatabaseContext.Database.EnsureCreated();
-        }
+    private static void InitializeDatabase()
+    {
+        DatabaseContext = ServiceProvider.GetRequiredService<HistoryContext>();
+        DatabaseContext.Database.EnsureCreated();
+    }
         
-        private static IConfiguration InitConfiguration()
-        {
-            var config = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.test.json")
-                .Build();
+    private static IConfiguration InitConfiguration()
+    {
+        var config = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.test.json")
+            .Build();
 
-            return config;
-        }
+        return config;
+    }
         
-        protected T GetService<T>()
-        {
-            return ServiceProvider.GetService<T>();
-        }
+    protected T GetService<T>()
+    {
+        return ServiceProvider.GetService<T>();
+    }
         
-        [TestCleanup]
-        public void Cleanup()
-        {
-            DatabaseContext.Database.EnsureDeleted();
-        }
+    [TestCleanup]
+    public void Cleanup()
+    {
+        DatabaseContext.Database.EnsureDeleted();
     }
 }

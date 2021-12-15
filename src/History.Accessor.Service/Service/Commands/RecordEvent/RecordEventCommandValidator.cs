@@ -1,22 +1,21 @@
 using FluentValidation;
 
-namespace History.Accessor.Service.Service.Commands.RecordEvent
+namespace History.Accessor.Service.Service.Commands.RecordEvent;
+
+public class RecordEventCommandValidator : AbstractValidator<Contracts.Commands.RecordEventCommand>
 {
-    public class RecordEventCommandValidator : AbstractValidator<Contracts.Commands.RecordEventCommand>
+    public RecordEventCommandValidator()
     {
-        public RecordEventCommandValidator()
-        {
-            RuleFor(x => x.Message)
-                .NotEmpty();
+        RuleFor(x => x.Message)
+            .NotEmpty();
 
-            RuleFor(x => x.EntityType)
-                .NotEmpty();
+        RuleFor(x => x.EntityType)
+            .NotEmpty();
 
-            RuleFor(x => x.EventName)
-                .NotEmpty();
+        RuleFor(x => x.EventName)
+            .NotEmpty();
 
-            RuleFor(x => x.EntityPrimaryKey)
-                .NotEmpty();
-        }
+        RuleFor(x => x.EntityPrimaryKey)
+            .NotEmpty();
     }
 }

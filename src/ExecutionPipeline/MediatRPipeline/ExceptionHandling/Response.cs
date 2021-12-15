@@ -3,127 +3,126 @@ using System.Net;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace ExecutionPipeline.MediatRPipeline.ExceptionHandling
+namespace ExecutionPipeline.MediatRPipeline.ExceptionHandling;
+
+/// <summary>
+/// Used for BLL and low layer results.
+/// </summary>
+public class Response
 {
+    public bool IsSuccess { get; }
+        
+    public bool IsFailure => !IsSuccess;
+        
+    [JsonProperty] // Workaround the serializer.
+    public string StackTrace { get; private set; }
+
     /// <summary>
-    /// Used for BLL and low layer results.
+    /// Set to string if there will be a need to define custom domain / interaction / data transfer specific response codes.
+    /// Example would be gRPC and REST response codes.
+    /// Augumentation can be done using some domain defined codes.
     /// </summary>
-    public class Response
+    [JsonProperty] // Workaround the serializer.
+    public string ResponseCode { get; private set; }
+        
+    [Obsolete("Used only for serializers and mappers")]
+    public Response()
     {
-        public bool IsSuccess { get; }
+        //
+    }
+    protected Response(bool isSuccess, string stackTrace, string code)
+    {
+        this.IsSuccess = isSuccess;
+        this.StackTrace = stackTrace;
+        this.ResponseCode = code;
+    }
         
-        public bool IsFailure => !IsSuccess;
+    protected Response(bool isSuccess, string stackTrace, HttpStatusCode code)
+    {
+        this.IsSuccess = isSuccess;
+        this.StackTrace = stackTrace;
+        this.ResponseCode = code.ToString();
+    }
+
+    public static Response Fail(string message)
+    {
+        return new Response(false,message, HttpStatusCode.BadRequest);
+    }
         
-        [JsonProperty] // Workaround the serializer.
-        public string StackTrace { get; private set; }
-
-        /// <summary>
-        /// Set to string if there will be a need to define custom domain / interaction / data transfer specific response codes.
-        /// Example would be gRPC and REST response codes.
-        /// Augumentation can be done using some domain defined codes.
-        /// </summary>
-        [JsonProperty] // Workaround the serializer.
-        public string ResponseCode { get; private set; }
+    public static Response Fail(string message, string code)
+    {
+        return new Response(false,message, code);
+    }
         
-        [Obsolete("Used only for serializers and mappers")]
-        public Response()
-        {
-            //
-        }
-        protected Response(bool isSuccess, string stackTrace, string code)
-        {
-            this.IsSuccess = isSuccess;
-            this.StackTrace = stackTrace;
-            this.ResponseCode = code;
-        }
+    public static Response Fail(string message, HttpStatusCode code)
+    {
+        return new Response(false,message, code);
+    }
+
+    public static Response<T> Fail<T>(string message)
+    {
+        return new Response<T>(default(T), false, message, HttpStatusCode.BadRequest);
+    }
+
+    public static Response<T> Fail<T>(string message, string code)
+    {
+        return new Response<T>(default(T),false,message, code);
+    }
+
+    public static Response<T> Fail<T>(string message, HttpStatusCode code)
+    {
+        return new Response<T>(default(T),false,message, code);
+    }
+
+    public static Response Ok()
+    {
+        return new Response(true,string.Empty, HttpStatusCode.OK);
+    }
+
+    public static Response Ok(string code)
+    {
+        return new Response(true, string.Empty, code);
+    }
         
-        protected Response(bool isSuccess, string stackTrace, HttpStatusCode code)
-        {
-            this.IsSuccess = isSuccess;
-            this.StackTrace = stackTrace;
-            this.ResponseCode = code.ToString();
-        }
+    public static Response<T> Ok<T>(T value)
+    {
+        return new Response<T>(value, true, string.Empty, HttpStatusCode.OK);
+    }
 
-        public static Response Fail(string message)
-        {
-            return new Response(false,message, HttpStatusCode.BadRequest);
-        }
+    public static Response<T> Ok<T>(T value, string code)
+    {
+        return new Response<T>(value, true, string.Empty, code);
+    }
         
-        public static Response Fail(string message, string code)
-        {
-            return new Response(false,message, code);
-        }
-        
-        public static Response Fail(string message, HttpStatusCode code)
-        {
-            return new Response(false,message, code);
-        }
+    public static Response<T> Ok<T>(T value, HttpStatusCode code)
+    {
+        return new Response<T>(value, true, string.Empty, code);
+    }
+}
+    
+public class Response<T> : Response
+{
+    private readonly T _value;
 
-        public static Response<T> Fail<T>(string message)
-        {
-            return new Response<T>(default(T), false, message, HttpStatusCode.BadRequest);
-        }
 
-        public static Response<T> Fail<T>(string message, string code)
+    public T Value
+    {
+        get
         {
-            return new Response<T>(default(T),false,message, code);
-        }
 
-        public static Response<T> Fail<T>(string message, HttpStatusCode code)
-        {
-            return new Response<T>(default(T),false,message, code);
-        }
-
-        public static Response Ok()
-        {
-            return new Response(true,string.Empty, HttpStatusCode.OK);
-        }
-
-        public static Response Ok(string code)
-        {
-            return new Response(true, string.Empty, code);
-        }
-        
-        public static Response<T> Ok<T>(T value)
-        {
-            return new Response<T>(value, true, string.Empty, HttpStatusCode.OK);
-        }
-
-        public static Response<T> Ok<T>(T value, string code)
-        {
-            return new Response<T>(value, true, string.Empty, code);
-        }
-        
-        public static Response<T> Ok<T>(T value, HttpStatusCode code)
-        {
-            return new Response<T>(value, true, string.Empty, code);
+            return _value;
         }
     }
-    
-    public class Response<T> : Response
+
+    protected internal Response(T value, bool isSuccess, string stackTrace, string code) 
+        : base(isSuccess, stackTrace, code)
     {
-        private readonly T _value;
-
-
-        public T Value
-        {
-            get
-            {
-
-                return _value;
-            }
-        }
-
-        protected internal Response(T value, bool isSuccess, string stackTrace, string code) 
-            : base(isSuccess, stackTrace, code)
-        {
-            _value = value;
-        }
+        _value = value;
+    }
         
-        protected internal Response(T value, bool isSuccess, string stackTrace, HttpStatusCode code) 
-            : base(isSuccess, stackTrace, code)
-        {
-            _value = value;
-        }
+    protected internal Response(T value, bool isSuccess, string stackTrace, HttpStatusCode code) 
+        : base(isSuccess, stackTrace, code)
+    {
+        _value = value;
     }
 }

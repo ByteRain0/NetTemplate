@@ -2,12 +2,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 
-namespace Localization.Accessor.Contracts.Contracts
-{
-    public interface ILocalizationConfigurationsAccessor
-    {
-        Task<Response<HashSet<Locale>>> GetAvailableLocales();
+namespace Localization.Accessor.Contracts.Contracts;
 
-        Task<Response<string>> DefaultLocale();
-    }
+public interface ILocalizationConfigurationsAccessor
+{
+    Task<Response<HashSet<Locale>>> GetAvailableLocales();
+
+    Task<Response<string>> DefaultLocale();
 }

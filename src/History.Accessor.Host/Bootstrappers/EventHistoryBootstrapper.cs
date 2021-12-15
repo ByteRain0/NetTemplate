@@ -13,47 +13,46 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace History.Accessor.Host.Bootstrappers
+namespace History.Accessor.Host.Bootstrappers;
+
+public static class EventHistoryBootstrapper
 {
-    public static class EventHistoryBootstrapper
+    public static void AddEventHistory(this IServiceCollection services, IConfiguration config)
     {
-        public static void AddEventHistory(this IServiceCollection services, IConfiguration config)
-        {
-            services.AddTransient<IHistoryContext, HistoryContext>();
-            services.AddTransient<IHistoryAccessor, HistoryAccessor>();
-            services.AddMediatR(typeof(HistoryAccessor));
+        services.AddTransient<IHistoryContext, HistoryContext>();
+        services.AddTransient<IHistoryAccessor, HistoryAccessor>();
+        services.AddMediatR(typeof(HistoryAccessor));
             
-            FluentValidation.ServiceCollectionExtensions.AddValidatorsFromAssemblies(services, 
-                new List<Assembly>()
-                {
-                    typeof(HistoryContext).Assembly
-                });
-            
-            services.AddAutoMapper(c =>
+        FluentValidation.ServiceCollectionExtensions.AddValidatorsFromAssemblies(services, 
+            new List<Assembly>()
             {
-                c.AddMaps(new List<Assembly>() {typeof(HistoryContext).Assembly});
+                typeof(HistoryContext).Assembly
             });
             
-            services.AddDbContext<HistoryContext>(
-                opts => opts.UseSqlServer(config.GetConnectionString("DefaultConnection"))
-            );
-            
-            var hcBuilder = services.AddHealthChecks();
-            
-            hcBuilder.AddCheck<HistoryAccessorHealthCheck>(
-                "history_accessor_health_check",
-                failureStatus: HealthStatus.Degraded,
-                tags: new[] { "HistoryAccessor" });
-        }
-
-        public static void ApplyEventHistoryMigrations(this IApplicationBuilder app)
+        services.AddAutoMapper(c =>
         {
-            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            c.AddMaps(new List<Assembly>() {typeof(HistoryContext).Assembly});
+        });
+            
+        services.AddDbContext<HistoryContext>(
+            opts => opts.UseSqlServer(config.GetConnectionString("DefaultConnection"))
+        );
+            
+        var hcBuilder = services.AddHealthChecks();
+            
+        hcBuilder.AddCheck<HistoryAccessorHealthCheck>(
+            "history_accessor_health_check",
+            failureStatus: HealthStatus.Degraded,
+            tags: new[] { "HistoryAccessor" });
+    }
+
+    public static void ApplyEventHistoryMigrations(this IApplicationBuilder app)
+    {
+        using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+        {
+            using (var context = serviceScope.ServiceProvider.GetService<HistoryContext>())
             {
-                using (var context = serviceScope.ServiceProvider.GetService<HistoryContext>())
-                {
-                    context?.Database.Migrate();
-                }
+                context?.Database.Migrate();
             }
         }
     }

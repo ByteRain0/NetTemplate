@@ -7,35 +7,34 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace ExecutionPipeline.MediatRPipeline.ExceptionHandling
+namespace ExecutionPipeline.MediatRPipeline.ExceptionHandling;
+
+public class RequestExceptionWrapperMiddleware<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
 {
-    public class RequestExceptionWrapperMiddleware<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    private readonly ILogger<TRequest> _logger;
+
+    public RequestExceptionWrapperMiddleware(ILogger<TRequest> logger)
     {
-        private readonly ILogger<TRequest> _logger;
+        _logger = logger;
+    }
 
-        public RequestExceptionWrapperMiddleware(ILogger<TRequest> logger)
+    public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+    {
+        try
         {
-            _logger = logger;
+            var response = await next();
+            return response;
         }
-
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        catch (ValidationException e)
         {
-            try
-            {
-                var response = await next();
-                return response;
-            }
-            catch (ValidationException e)
-            {
-                var response = JsonConvert.SerializeObject(Response.Fail(e.Message, HttpStatusCode.Forbidden));
-                return JsonConvert.DeserializeObject<TResponse>(response);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Error encountered while processing request '{Request}' error message : '{ErrorMessage}'", request.ToString(), e.Message);
-                var response = JsonConvert.SerializeObject(Response.Fail(e.Message));
-                return JsonConvert.DeserializeObject<TResponse>(response);
-            }
+            var response = JsonConvert.SerializeObject(Response.Fail(e.Message, HttpStatusCode.Forbidden));
+            return JsonConvert.DeserializeObject<TResponse>(response);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error encountered while processing request '{Request}' error message : '{ErrorMessage}'", request.ToString(), e.Message);
+            var response = JsonConvert.SerializeObject(Response.Fail(e.Message));
+            return JsonConvert.DeserializeObject<TResponse>(response);
         }
     }
 }

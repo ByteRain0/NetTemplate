@@ -6,20 +6,19 @@ using History.Accessor.Service.Infrastructure.DatabaseContext;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace History.Accessor.Service.Service.Queries.CountEvents
+namespace History.Accessor.Service.Service.Queries.CountEvents;
+
+internal class CountAuditEntriesQueryHandler : IRequestHandler<CountEventEntriesQuery, Response<int>>
 {
-    internal class CountAuditEntriesQueryHandler : IRequestHandler<CountEventEntriesQuery, Response<int>>
+    private readonly IHistoryContext _context;
+
+    public CountAuditEntriesQueryHandler(IHistoryContext context)
     {
-        private readonly IHistoryContext _context;
+        _context = context;
+    }
 
-        public CountAuditEntriesQueryHandler(IHistoryContext context)
-        {
-            _context = context;
-        }
-
-        public async Task<Response<int>> Handle(CountEventEntriesQuery request, CancellationToken cancellationToken)
-        {
-            return Response.Ok(await _context.Events.CountAsync(CancellationToken.None));
-        }
+    public async Task<Response<int>> Handle(CountEventEntriesQuery request, CancellationToken cancellationToken)
+    {
+        return Response.Ok(await _context.Events.CountAsync(CancellationToken.None));
     }
 }

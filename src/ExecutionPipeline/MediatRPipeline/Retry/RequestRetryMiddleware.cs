@@ -9,56 +9,55 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Polly;
 
-namespace ExecutionPipeline.MediatRPipeline.Retry
+namespace ExecutionPipeline.MediatRPipeline.Retry;
+
+public class RequestRetryMiddleware<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
 {
-    public class RequestRetryMiddleware<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    private readonly ILogger<TRequest> _logger;
+
+    private RetryMiddlewareOptions _config;
+
+    public RequestRetryMiddleware(ILogger<TRequest> logger, IOptions<RetryMiddlewareOptions> config)
     {
-        private readonly ILogger<TRequest> _logger;
+        _logger = logger;
+        _config = config.Value;
+    }
 
-        private RetryMiddlewareOptions _config;
-
-        public RequestRetryMiddleware(ILogger<TRequest> logger, IOptions<RetryMiddlewareOptions> config)
+    public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
+        RequestHandlerDelegate<TResponse> next)
+    {
+        if (!((IList) typeof(TRequest).GetInterfaces()).Contains(typeof(IRetryMarker)))
         {
-            _logger = logger;
-            _config = config.Value;
+            return await next();
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
-            RequestHandlerDelegate<TResponse> next)
+        if (_config.CustomConfiguration is not null)
         {
-            if (!((IList) typeof(TRequest).GetInterfaces()).Contains(typeof(IRetryMarker)))
+            var customConfiguration = _config.CustomConfiguration.FirstOrDefault(x => x.Name == typeof(TRequest).Name);
+            if (customConfiguration is not null)
             {
-                return await next();
+                _config.DefaultOperationIncrementalCount = customConfiguration.IncrementalCount;
+                _config.DefaultOperationRetryCount = customConfiguration.RetryCount;
             }
+        }
 
-            if (_config.CustomConfiguration is not null)
-            {
-                var customConfiguration = _config.CustomConfiguration.FirstOrDefault(x => x.Name == typeof(TRequest).Name);
-                if (customConfiguration is not null)
+        var retryPolicy = Policy
+            .Handle<Exception>()
+            .WaitAndRetryAsync(retryCount: _config.DefaultOperationRetryCount, sleepDurationProvider: retryAttempt =>
                 {
-                    _config.DefaultOperationIncrementalCount = customConfiguration.IncrementalCount;
-                    _config.DefaultOperationRetryCount = customConfiguration.RetryCount;
-                }
-            }
-
-            var retryPolicy = Policy
-                .Handle<Exception>()
-                .WaitAndRetryAsync(retryCount: _config.DefaultOperationRetryCount, sleepDurationProvider: retryAttempt =>
+                    var timeToWait = TimeSpan.FromSeconds(retryAttempt * _config.DefaultOperationIncrementalCount);
+                    _logger.LogTrace(
+                        $"Execution delay of request '{JsonConvert.SerializeObject(request)}' for '{timeToWait.TotalSeconds}' seconds...");
+                    return timeToWait;
+                },
+                onRetry: (exception, pollyRetryCount, context) =>
+                {
+                    if (exception != null)
                     {
-                        var timeToWait = TimeSpan.FromSeconds(retryAttempt * _config.DefaultOperationIncrementalCount);
-                        _logger.LogTrace(
-                            $"Execution delay of request '{JsonConvert.SerializeObject(request)}' for '{timeToWait.TotalSeconds}' seconds...");
-                        return timeToWait;
-                    },
-                    onRetry: (exception, pollyRetryCount, context) =>
-                    {
-                        if (exception != null)
-                        {
-                            _logger.LogError(exception, exception.Message);
-                        }
-                    });
+                        _logger.LogError(exception, exception.Message);
+                    }
+                });
 
-            return await retryPolicy.ExecuteAsync(async () => await next());
-        }
+        return await retryPolicy.ExecuteAsync(async () => await next());
     }
 }

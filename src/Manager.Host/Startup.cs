@@ -12,56 +12,55 @@ using Microsoft.Extensions.Hosting;
 using Session.Accessor.Service.Host.Bootstrappers;
 using Voyager;
 
-namespace Manager.Host
+namespace Manager.Host;
+
+public class Startup
 {
-    public class Startup
+    public Startup(IConfiguration configuration)
     {
-        public Startup(IConfiguration configuration)
+        Configuration = configuration;
+    }
+
+    public IConfiguration Configuration { get; }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddEventHistory(Configuration);
+        services.AddExecutionPipeline();
+        services.AddSessionAccessors();
+        services.AddMessageDispatcher(Configuration);
+        services.AddBlobStorage(Configuration);
+        services.AddCustomLocalization(Configuration);
+        services.AddManagerServices();
+        services.AddSwagger();
+    }
+
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        if (env.IsDevelopment())
         {
-            Configuration = configuration;
+            app.UseDeveloperExceptionPage();
         }
 
-        public IConfiguration Configuration { get; }
+        app.ApplyEventHistoryMigrations();
+            
+        app.AddSwagger();
+            
+        app.UseVoyagerExceptionHandler();
+        app.UseHttpsRedirection();
 
-        public void ConfigureServices(IServiceCollection services)
+        app.UseRouting();
+
+        app.UseAuthorization();
+        app.UseLocalization();
+
+        app.UseMessageDispatcher();
+            
+        app.UseEndpoints(endpoints =>
         {
-            services.AddEventHistory(Configuration);
-            services.AddExecutionPipeline();
-            services.AddSessionAccessors();
-            services.AddMessageDispatcher(Configuration);
-            services.AddBlobStorage(Configuration);
-            services.AddCustomLocalization(Configuration);
-            services.AddManagerServices();
-            services.AddSwagger();
-        }
-
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.ApplyEventHistoryMigrations();
+            endpoints.MapVoyager();
+        });
             
-            app.AddSwagger();
-            
-            app.UseVoyagerExceptionHandler();
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-            app.UseLocalization();
-
-            app.UseMessageDispatcher();
-            
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapVoyager();
-            });
-            
-            app.UseHealthChecks();
-        }
+        app.UseHealthChecks();
     }
 }

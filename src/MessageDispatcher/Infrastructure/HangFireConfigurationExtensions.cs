@@ -1,17 +1,16 @@
 using Hangfire;
 using Newtonsoft.Json;
 
-namespace MessageDispatcher.Infrastructure
+namespace MessageDispatcher.Infrastructure;
+
+public static class HangFireConfigurationExtensions
 {
-    public static class HangFireConfigurationExtensions
+    public static void UseMediatR(this IGlobalConfiguration configuration)
     {
-        public static void UseMediatR(this IGlobalConfiguration configuration)
+        var jsonSettings = new JsonSerializerSettings()
         {
-            var jsonSettings = new JsonSerializerSettings()
-            {
-                TypeNameHandling = TypeNameHandling.All
-            };
-            configuration.UseSerializerSettings(jsonSettings);
-        }
+            TypeNameHandling = TypeNameHandling.All
+        };
+        configuration.UseSerializerSettings(jsonSettings);
     }
 }

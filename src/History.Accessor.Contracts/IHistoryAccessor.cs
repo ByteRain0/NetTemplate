@@ -5,17 +5,16 @@ using History.Accessor.Contracts.Commands;
 using History.Accessor.Contracts.DTO_s;
 using History.Accessor.Contracts.Queries;
 
-namespace History.Accessor.Contracts
+namespace History.Accessor.Contracts;
+
+/// <summary>
+/// Service methods are all async.
+/// </summary>
+public interface IHistoryAccessor
 {
-    /// <summary>
-    /// Service methods are all async.
-    /// </summary>
-    public interface IHistoryAccessor
-    {
-        Task<Response<EventOverviewDto>> GetEvents(GetEventsQuery query, CancellationToken cancellationToken);
+    Task<Response<EventOverviewDto>> GetEvents(GetEventsQuery query, CancellationToken cancellationToken);
 
-        Task<Response> RecordEvent(RecordEventCommand request, CancellationToken cancellationToken);
+    Task<Response> RecordEvent(RecordEventCommand request, CancellationToken cancellationToken);
 
-        Task<Response<int>> CountEvents(CountEventEntriesQuery request, CancellationToken cancellationToken);
-    }
+    Task<Response<int>> CountEvents(CountEventEntriesQuery request, CancellationToken cancellationToken);
 }

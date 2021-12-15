@@ -1,8 +1,7 @@
-namespace Localization.Accessor.Service.Accessors.FileAccessor.Contracts.Queries
+namespace Localization.Accessor.Service.Accessors.FileAccessor.Contracts.Queries;
+
+public class GetLocalizationsQuery
 {
-    public class GetLocalizationsQuery
-    {
-        public string Locale { get; set; }
+    public string Locale { get; set; }
         
-    }
 }

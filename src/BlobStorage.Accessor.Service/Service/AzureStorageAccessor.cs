@@ -14,58 +14,57 @@ using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace BlobStorage.Accessor.Service.Service
+namespace BlobStorage.Accessor.Service.Service;
+
+public class AzureStorageAccessor : IStorageAccessor
 {
-    public class AzureStorageAccessor : IStorageAccessor
-    {
-        private BlobContainerClient _blobContainer;
+    private BlobContainerClient _blobContainer;
 
         
-        public AzureStorageAccessor(IOptions<AzureStorageConfigs> options, ILogger<AzureStorageAccessor> logger)
+    public AzureStorageAccessor(IOptions<AzureStorageConfigs> options, ILogger<AzureStorageAccessor> logger)
+    {
+        _blobContainer = new BlobServiceClient(options.Value.ConnectionString)
+            .GetBlobContainerClient(options.Value.ContainerName.ToLowerInvariant());
+        _blobContainer.CreateIfNotExists();
+    }
+
+    public async Task<Response> Upload(UploadContentCommand request, CancellationToken cancellationToken)
+    {
+        if (!request.Stream.IsBase64String())
         {
-            _blobContainer = new BlobServiceClient(options.Value.ConnectionString)
-                .GetBlobContainerClient(options.Value.ContainerName.ToLowerInvariant());
-            _blobContainer.CreateIfNotExists();
+            request.Stream = request.Stream.EncodeToBase64();
         }
 
-        public async Task<Response> Upload(UploadContentCommand request, CancellationToken cancellationToken)
+        BlobClient blobClient = _blobContainer.GetBlobClient($"{request.CustomPath}/{request.FileName}");
+
+        byte[] data = Encoding.ASCII.GetBytes(request.Stream);
+
+        await using (var stream = new MemoryStream(data, writable: false))
         {
-            if (!request.Stream.IsBase64String())
-            {
-                request.Stream = request.Stream.EncodeToBase64();
-            }
-
-            BlobClient blobClient = _blobContainer.GetBlobClient($"{request.CustomPath}/{request.FileName}");
-
-            byte[] data = Encoding.ASCII.GetBytes(request.Stream);
-
-            await using (var stream = new MemoryStream(data, writable: false))
-            {
-                var operation = await blobClient.UploadAsync(stream,
-                    new BlobHttpHeaders()
-                    {
-                        ContentType = request.ContentType
-                    },
-                    request.Tags, cancellationToken: cancellationToken);
-            }
-            return Response.Ok();
+            var operation = await blobClient.UploadAsync(stream,
+                new BlobHttpHeaders()
+                {
+                    ContentType = request.ContentType
+                },
+                request.Tags, cancellationToken: cancellationToken);
         }
+        return Response.Ok();
+    }
 
-        public async Task<Response<string>> Download(DownloadContentQuery request, CancellationToken cancellationToken)
-        {
-            BlobClient blob = _blobContainer.GetBlobClient(request.GetSingleFilePath);
+    public async Task<Response<string>> Download(DownloadContentQuery request, CancellationToken cancellationToken)
+    {
+        BlobClient blob = _blobContainer.GetBlobClient(request.GetSingleFilePath);
             
-            BlobDownloadInfo blobData = await blob.DownloadAsync(cancellationToken:cancellationToken);
+        BlobDownloadInfo blobData = await blob.DownloadAsync(cancellationToken:cancellationToken);
 
-            StreamReader reader = new StreamReader(blobData.Content);
-            string result = await reader.ReadToEndAsync();
+        StreamReader reader = new StreamReader(blobData.Content);
+        string result = await reader.ReadToEndAsync();
 
-            if (result.IsBase64String())
-            {
-                return Response.Ok(value:result);
-            }
-
-            return Response.Ok(value:result.EncodeToBase64());
+        if (result.IsBase64String())
+        {
+            return Response.Ok(value:result);
         }
+
+        return Response.Ok(value:result.EncodeToBase64());
     }
 }

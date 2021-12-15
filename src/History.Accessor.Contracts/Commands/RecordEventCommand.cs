@@ -3,9 +3,8 @@ using ExecutionPipeline.MediatRPipeline.Retry;
 using History.Accessor.Contracts.DTO_s;
 using MediatR;
 
-namespace History.Accessor.Contracts.Commands
+namespace History.Accessor.Contracts.Commands;
+
+public class RecordEventCommand : EventDTO, IRequest<Response>, IRetryMarker
 {
-    public class RecordEventCommand : EventDTO, IRequest<Response>, IRetryMarker
-    {
-    }
 }

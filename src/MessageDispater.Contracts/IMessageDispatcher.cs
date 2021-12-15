@@ -2,12 +2,11 @@ using System.Threading.Tasks;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using MediatR;
 
-namespace MessageDispatcher.Contracts
+namespace MessageDispatcher.Contracts;
+
+public interface IMessageDispatcher
 {
-    public interface IMessageDispatcher
-    {
-        Response Dispatch(string jobIdentifier, IRequest request);
+    Response Dispatch(string jobIdentifier, IRequest request);
         
-        Response Dispatch<T>(string jobIdentifier, IRequest<T> request);
-    }
+    Response Dispatch<T>(string jobIdentifier, IRequest<T> request);
 }

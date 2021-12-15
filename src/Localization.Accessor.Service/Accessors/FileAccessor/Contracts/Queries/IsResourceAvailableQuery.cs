@@ -1,7 +1,6 @@
-namespace Localization.Accessor.Service.Accessors.FileAccessor.Contracts.Queries
+namespace Localization.Accessor.Service.Accessors.FileAccessor.Contracts.Queries;
+
+public class IsResourceAvailableQuery
 {
-    public class IsResourceAvailableQuery
-    {
-        public string Locale { get; set; }
-    }
+    public string Locale { get; set; }
 }

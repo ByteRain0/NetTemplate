@@ -4,18 +4,17 @@ using Manager.Service.Services.History.Commands.RecordEvent;
 using Microsoft.Extensions.DependencyInjection;
 using Voyager;
 
-namespace Manager.Host.Bootstrappers
+namespace Manager.Host.Bootstrappers;
+
+public static class OrchestraManagerBootstrapper
 {
-    public static class OrchestraManagerBootstrapper
+    public static void AddManagerServices(this IServiceCollection services)
     {
-        public static void AddManagerServices(this IServiceCollection services)
+        services.AddControllers();
+        services.AddVoyager(c => { c.AddAssemblyWith<RecordEvent>(); });
+        services.AddAutoMapper(c =>
         {
-            services.AddControllers();
-            services.AddVoyager(c => { c.AddAssemblyWith<RecordEvent>(); });
-            services.AddAutoMapper(c =>
-            {
-                c.AddMaps(new List<Assembly>() {typeof(OrchestraManagerBootstrapper).Assembly});
-            });
-        }
+            c.AddMaps(new List<Assembly>() {typeof(RecordEvent).Assembly});
+        });
     }
 }
