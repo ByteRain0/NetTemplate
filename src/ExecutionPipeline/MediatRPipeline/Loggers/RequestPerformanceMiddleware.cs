@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using ExecutionPipeline.MediatRPipeline.LoggingInfrastructure;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -31,7 +32,8 @@ public class RequestPerformanceMiddleware<TRequest, TResponse> : IPipelineBehavi
         
         var name = typeof(TRequest).Name;
 
-        _logger.LogWarning("Long Running Request: RequestName : '{Name}' (Elapsed Time : '{ElapsedTime}' milliseconds). Payload : '{Payload}'.", name, _timer.ElapsedMilliseconds,  JsonConvert.SerializeObject(request));
+        _logger.LogWarning("TemplateId : {TemplateId}. Long Running Request: RequestName : '{Name}' (Elapsed Time : '{ElapsedTime}' milliseconds). Payload : '{Payload}'.", 
+            StructuredLogsTemplates.LongRunningRequestTemplate, name, _timer.ElapsedMilliseconds,  JsonConvert.SerializeObject(request));
 
         return response;
     }

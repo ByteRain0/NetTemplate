@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using ExecutionPipeline.MediatRPipeline.LoggingInfrastructure;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -27,13 +28,15 @@ public class RequestExceptionWrapperMiddleware<TRequest, TResponse> : IPipelineB
         }
         catch (ValidationException e)
         {
-            _logger.LogError(e, "Invalid payload '{Payload}'. RequestName : '{Request}'. Error message : '{ErrorMessage}'", JsonConvert.SerializeObject(request), typeof(TRequest).Name, e.Message);
+            _logger.LogError(e, "TemplateId : {TemplateId}. Invalid payload '{Payload}'. RequestName : '{Request}'. Error message : '{ErrorMessage}'", 
+                StructuredLogsTemplates.ExceptionEncounteredTemplate, JsonConvert.SerializeObject(request), typeof(TRequest).Name, e.Message);
             var response = JsonConvert.SerializeObject(Response.Fail(e.Message, HttpStatusCode.Forbidden));
             return JsonConvert.DeserializeObject<TResponse>(response);
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error encountered while processing request '{Request}' error message : '{ErrorMessage}'", typeof(TRequest).Name, e.Message);
+            _logger.LogError(e, "TemplateId : {TemplateId}. Error encountered while processing request '{Request}' error message : '{ErrorMessage}'", 
+                StructuredLogsTemplates.ExceptionEncounteredTemplate, typeof(TRequest).Name, e.Message);
             var response = JsonConvert.SerializeObject(Response.Fail(e.Message));
             return JsonConvert.DeserializeObject<TResponse>(response);
         }

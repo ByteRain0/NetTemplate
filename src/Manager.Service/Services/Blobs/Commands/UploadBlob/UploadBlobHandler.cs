@@ -23,7 +23,6 @@ internal class UploadBlobHandler : IRequestHandler<UploadBlob, Response>
 
     public async Task<Response> Handle(UploadBlob request, CancellationToken cancellationToken)
     {
-        var test = await _storageAccessor.Upload(_mapper.Map<UploadItemCommand>(request), cancellationToken);
-        return test;
+        return await _storageAccessor.Upload(_mapper.Map<UploadItemCommand>(request), cancellationToken);
     }
 }

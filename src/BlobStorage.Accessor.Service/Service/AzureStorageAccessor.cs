@@ -6,13 +6,12 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using BlobStorage.Accessor.Contracts;
-using BlobStorage.Accessor.Contracts.Commands;
 using BlobStorage.Accessor.Contracts.Commands.DeleteItem;
 using BlobStorage.Accessor.Contracts.Commands.UploadContent;
-using BlobStorage.Accessor.Contracts.Queries;
 using BlobStorage.Accessor.Contracts.Queries.DownloadContent;
 using BlobStorage.Accessor.Contracts.Queries.ListItems;
 using BlobStorage.Accessor.Service.Infrastructure;
@@ -26,12 +25,22 @@ public class AzureStorageAccessor : IStorageAccessor
 {
     private BlobContainerClient _blobContainer;
 
-        
     public AzureStorageAccessor(IOptions<AzureStorageConfigs> options, ILogger<AzureStorageAccessor> logger)
     {
-        _blobContainer = new BlobServiceClient(options.Value.ConnectionString)
-            .GetBlobContainerClient(options.Value.ContainerName.ToLowerInvariant());
-        _blobContainer.CreateIfNotExists();
+        Guard.Against.NullOrEmpty(options.Value.ConnectionString, "Null or empty blob storage connection string provided");
+        Guard.Against.NullOrEmpty(options.Value.ContainerName, "Null or empty blob storage container name provided");
+        try
+        {
+            _blobContainer = new BlobServiceClient(options.Value.ConnectionString)
+                .GetBlobContainerClient(options.Value.ContainerName.ToLowerInvariant());
+            _blobContainer.CreateIfNotExists();
+        }
+        catch (Exception e)
+        {
+            //Log critical info and rethrow.
+            logger.LogCritical("Error encountered while creating storage container. Error : '{Exception}'.",e.Message);
+            throw;
+        }
     }
 
     public async Task<Response> Upload(UploadItemCommand request, CancellationToken cancellationToken)

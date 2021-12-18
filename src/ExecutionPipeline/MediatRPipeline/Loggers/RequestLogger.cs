@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using ExecutionPipeline.MediatRPipeline.LoggingInfrastructure;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -24,11 +25,13 @@ public class RequestLogger<TRequest, TResponse> : IPipelineBehavior<TRequest, TR
 
         var requestId = Guid.NewGuid();
         
-        _logger.LogInformation("Executing request: '{RequestId}' '{RequestName}' '{RequestPayload}'", requestId, name, JsonConvert.SerializeObject(request));
+        _logger.LogInformation("TemplateId : {TemplateId}. Executing request: '{RequestId}' '{RequestName}' '{RequestPayload}'", 
+            StructuredLogsTemplates.StartExecutionTemplate, requestId, name, JsonConvert.SerializeObject(request));
 
         var response = await next();
 
-        _logger.LogInformation("Executing request with id : '{RequestId}' has finished.", requestId);
+        _logger.LogInformation("TemplateId : {TemplateId}. Executing request with id : '{RequestId}' has finished.",
+            StructuredLogsTemplates.EndExecutionTemplate, requestId);
 
         return response;
     }
