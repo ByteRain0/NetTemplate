@@ -5,6 +5,7 @@ using AutoMapper;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using History.Accessor.Contracts;
 using History.Accessor.Contracts.Queries;
+using History.Accessor.Contracts.Queries.GetEventsQuery;
 using MediatR;
 
 namespace Manager.Service.Services.History.Queries.GetHistory;

@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using History.Accessor.Contracts;
 using History.Accessor.Contracts.Queries;
+using History.Accessor.Contracts.Queries.GetEventsQuery;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace History.Accessor.Host.HealthChecks;

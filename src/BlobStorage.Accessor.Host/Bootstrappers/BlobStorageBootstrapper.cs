@@ -1,5 +1,5 @@
 using BlobStorage.Accessor.Contracts;
-using BlobStorage.Accessor.Service.Host.Configurations;
+using BlobStorage.Accessor.Service.Infrastructure;
 using BlobStorage.Accessor.Service.Service;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

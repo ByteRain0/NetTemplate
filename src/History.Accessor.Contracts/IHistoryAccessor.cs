@@ -2,8 +2,11 @@
 using System.Threading.Tasks;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using History.Accessor.Contracts.Commands;
+using History.Accessor.Contracts.Commands.RecordEvent;
 using History.Accessor.Contracts.DTO_s;
 using History.Accessor.Contracts.Queries;
+using History.Accessor.Contracts.Queries.CountEventEntriesQuery;
+using History.Accessor.Contracts.Queries.GetEventsQuery;
 
 namespace History.Accessor.Contracts;
 

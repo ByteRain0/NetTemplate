@@ -1,8 +1,8 @@
 using FluentValidation;
 
-namespace History.Accessor.Service.Service.Commands.RecordEvent;
+namespace History.Accessor.Contracts.Commands.RecordEvent;
 
-public class RecordEventCommandValidator : AbstractValidator<Contracts.Commands.RecordEventCommand>
+public class RecordEventCommandValidator : AbstractValidator<RecordEventCommand>
 {
     public RecordEventCommandValidator()
     {

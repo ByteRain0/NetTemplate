@@ -1,6 +1,7 @@
 using AutoMapper;
 using History.Accessor.Contracts;
 using History.Accessor.Contracts.Commands;
+using History.Accessor.Contracts.Commands.RecordEvent;
 
 namespace Manager.Service.Services.History.Commands.RecordEvent;
 

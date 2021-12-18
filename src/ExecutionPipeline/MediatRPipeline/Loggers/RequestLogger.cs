@@ -23,13 +23,12 @@ public class RequestLogger<TRequest, TResponse> : IPipelineBehavior<TRequest, TR
         var name = typeof(TRequest).Name;
 
         var requestId = Guid.NewGuid();
-
-        _logger.LogInformation("Executing request: '{RequestId}' '{RequestName}' '{RequestPayload}'", requestId, name,
-            JsonConvert.SerializeObject(request));
+        
+        _logger.LogInformation("Executing request: '{RequestId}' '{RequestName}' '{RequestPayload}'", requestId, name, JsonConvert.SerializeObject(request));
 
         var response = await next();
 
-        _logger.LogInformation("Executing request with id : '{RequestId}' has finished.",requestId);
+        _logger.LogInformation("Executing request with id : '{RequestId}' has finished.", requestId);
 
         return response;
     }

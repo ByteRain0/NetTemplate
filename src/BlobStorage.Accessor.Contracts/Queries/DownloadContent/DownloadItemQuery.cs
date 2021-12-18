@@ -1,6 +1,6 @@
-namespace BlobStorage.Accessor.Contracts.Queries;
+namespace BlobStorage.Accessor.Contracts.Queries.DownloadContent;
 
-public class DownloadContentQuery
+public class DownloadItemQuery
 {
     public string FileName { get; set; }
         

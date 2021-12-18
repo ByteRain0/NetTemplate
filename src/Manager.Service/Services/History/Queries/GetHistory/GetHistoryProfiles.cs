@@ -1,6 +1,7 @@
 using AutoMapper;
 using History.Accessor.Contracts.DTO_s;
 using History.Accessor.Contracts.Queries;
+using History.Accessor.Contracts.Queries.GetEventsQuery;
 
 namespace Manager.Service.Services.History.Queries.GetHistory;
 

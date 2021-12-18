@@ -1,4 +1,4 @@
-namespace BlobStorage.Accessor.Service.Host.Configurations;
+namespace BlobStorage.Accessor.Service.Infrastructure;
 
 public class AzureStorageConfigs
 {

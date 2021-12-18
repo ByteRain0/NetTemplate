@@ -2,6 +2,7 @@ using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
 using History.Accessor.Contracts.Commands;
+using History.Accessor.Contracts.Commands.RecordEvent;
 using History.Accessor.Service.Service.Commands.RecordEvent;
 using History.Accessor.Tests.Infrastructure;
 using MediatR;

@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
+using History.Accessor.Contracts.Commands.RecordEvent;
 using History.Accessor.Service.Infrastructure.DatabaseContext;
 using History.Accessor.Service.Infrastructure.Models;
 using MediatR;
@@ -10,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace History.Accessor.Service.Service.Commands.RecordEvent;
 
-internal class RecordEventCommandHandler : IRequestHandler<Contracts.Commands.RecordEventCommand, Response>
+internal class RecordEventCommandHandler : IRequestHandler<RecordEventCommand, Response>
 {
     private readonly IHistoryContext _context;
 
@@ -22,7 +23,7 @@ internal class RecordEventCommandHandler : IRequestHandler<Contracts.Commands.Re
         _logger = logger;
     }
 
-    public async Task<Response> Handle(Contracts.Commands.RecordEventCommand model, CancellationToken cancellationToken)
+    public async Task<Response> Handle(RecordEventCommand model, CancellationToken cancellationToken)
     {
         EventDataModel eventDataModel = new EventDataModel(
             message: model.Message,
@@ -32,7 +33,7 @@ internal class RecordEventCommandHandler : IRequestHandler<Contracts.Commands.Re
             entityPrimaryKey: model.EntityPrimaryKey,
             entityType: model.EntityType);
 
-        _logger.LogTrace($"Recording event : '{JsonConvert.SerializeObject(eventDataModel)}' to local database.");
+        _logger.LogTrace("Recording event : EventData : '{EventData}'. to local database.",JsonConvert.SerializeObject(eventDataModel));
 
         await _context.Events.AddAsync(eventDataModel, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken: CancellationToken.None);

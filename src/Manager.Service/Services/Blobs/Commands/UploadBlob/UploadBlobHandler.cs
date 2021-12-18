@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BlobStorage.Accessor.Contracts;
 using BlobStorage.Accessor.Contracts.Commands;
+using BlobStorage.Accessor.Contracts.Commands.UploadContent;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using MediatR;
 
@@ -22,7 +23,7 @@ internal class UploadBlobHandler : IRequestHandler<UploadBlob, Response>
 
     public async Task<Response> Handle(UploadBlob request, CancellationToken cancellationToken)
     {
-        var test = await _storageAccessor.Upload(_mapper.Map<UploadContentCommand>(request), cancellationToken);
+        var test = await _storageAccessor.Upload(_mapper.Map<UploadItemCommand>(request), cancellationToken);
         return test;
     }
 }

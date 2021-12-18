@@ -9,8 +9,4 @@
       <ProjectReference Include="..\ExecutionPipeline\ExecutionPipeline.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Utilities" />
-    </ItemGroup>
-
 </Project>

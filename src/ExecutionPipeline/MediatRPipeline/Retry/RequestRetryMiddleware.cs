@@ -47,7 +47,7 @@ public class RequestRetryMiddleware<TRequest, TResponse> : IPipelineBehavior<TRe
                 {
                     var timeToWait = TimeSpan.FromSeconds(retryAttempt * _config.DefaultOperationIncrementalCount);
                     _logger.LogTrace(
-                        $"Execution delay of request '{JsonConvert.SerializeObject(request)}' for '{timeToWait.TotalSeconds}' seconds...");
+                        "Request : '{RequestName}'. Payload : '{Payload}'. is being delayed by : '{Timeout}'  seconds...",typeof(TRequest).Name, JsonConvert.SerializeObject(request),timeToWait.TotalSeconds);
                     return timeToWait;
                 },
                 onRetry: (exception, pollyRetryCount, context) =>

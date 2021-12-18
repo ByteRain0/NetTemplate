@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
-using History.Accessor.Contracts.Queries;
+using History.Accessor.Contracts.Queries.CountEventEntriesQuery;
 using History.Accessor.Service.Infrastructure.DatabaseContext;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace BlobStorage.Accessor.Contracts.Utilities;
+namespace BlobStorage.Accessor.Service.Infrastructure;
 
 public static class StringEncoder
 {

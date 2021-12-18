@@ -7,7 +7,7 @@ namespace History.Accessor.Service.Service.Queries.GetEventsQuery;
 
 public static class GetEventsQueryFilterExtensions
 {
-    public static Expression<Func<EventDataModel, bool>> ActionFilter(this Contracts.Queries.GetEventsQuery query)
+    public static Expression<Func<EventDataModel, bool>> ActionFilter(this Contracts.Queries.GetEventsQuery.GetEventsQuery query)
     {
         Expression<Func<EventDataModel, bool>> actionFilter = auditEntry =>
             query.Events == null || query.Events.All(string.IsNullOrEmpty) || !query.Events.Any() ||
@@ -15,7 +15,7 @@ public static class GetEventsQueryFilterExtensions
         return actionFilter;
     }
 
-    public static Expression<Func<EventDataModel, bool>> EntityFilter(this Contracts.Queries.GetEventsQuery query)
+    public static Expression<Func<EventDataModel, bool>> EntityFilter(this Contracts.Queries.GetEventsQuery.GetEventsQuery query)
     {
         Expression<Func<EventDataModel, bool>> entityFilter = auditEntry =>
             query.EntityTypes == null || query.EntityTypes.All(string.IsNullOrEmpty) || !query.EntityTypes.Any() ||
@@ -23,14 +23,14 @@ public static class GetEventsQueryFilterExtensions
         return entityFilter;
     }
 
-    public static Expression<Func<EventDataModel, bool>> UserIdFilter(this Contracts.Queries.GetEventsQuery query)
+    public static Expression<Func<EventDataModel, bool>> UserIdFilter(this Contracts.Queries.GetEventsQuery.GetEventsQuery query)
     {
         Expression<Func<EventDataModel, bool>> userIdFilter = auditEntry =>
             (!query.UserId.HasValue || query.UserId == Guid.Empty) || query.UserId.Equals(auditEntry.UserId);
         return userIdFilter;
     }
 
-    public static Expression<Func<EventDataModel, bool>> EntityPkFilterWithOrElseOptionalMessage(this Contracts.Queries.GetEventsQuery query)
+    public static Expression<Func<EventDataModel, bool>> EntityPkFilterWithOrElseOptionalMessage(this Contracts.Queries.GetEventsQuery.GetEventsQuery query)
     {
         Expression<Func<EventDataModel, bool>> entityPkFilterWithOrElseOptionalMessage = auditEntry =>
             query.EntityPrimaryKeys == null ? string.IsNullOrEmpty(query.OrElseSearchValue) ||
@@ -43,7 +43,7 @@ public static class GetEventsQueryFilterExtensions
         return entityPkFilterWithOrElseOptionalMessage;
     }
 
-    public static Expression<Func<EventDataModel, bool>> EntityPkFilterWithAndContainsMessage(this Contracts.Queries.GetEventsQuery query)
+    public static Expression<Func<EventDataModel, bool>> EntityPkFilterWithAndContainsMessage(this Contracts.Queries.GetEventsQuery.GetEventsQuery query)
     {
         Expression<Func<EventDataModel, bool>> entityPkFilterWithAndContainsMessage = auditEntry =>
             string.IsNullOrEmpty(query.AndContainsSearchValue) ||

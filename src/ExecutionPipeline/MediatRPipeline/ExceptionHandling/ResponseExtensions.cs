@@ -151,4 +151,8 @@ public static class ResponseActExtensions
         onFailure.Invoke();
     }
         
+    public static bool IsSuccessStatusCode(this int statusCode)
+    {
+        return ((int)statusCode >= 200) && ((int)statusCode <= 299);
+    }
 }

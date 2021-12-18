@@ -10,10 +10,8 @@
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="8.6.2" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-
         <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
         <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.1-rc2.4" />
-        
         <!--Packages required to run migrations from cmd.-->
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
             <PrivateAssets>all</PrivateAssets>
@@ -28,6 +26,7 @@
       <ProjectReference Include="..\History.Accessor.Contracts\History.Accessor.Contracts.csproj" />
       <ProjectReference Include="..\History.Accessor.Host\History.Accessor.Host.csproj" />
       <ProjectReference Include="..\Localization.Accessor.Host\Localization.Accessor.Host.csproj" />
+      <ProjectReference Include="..\Logger\Logger.csproj" />
       <ProjectReference Include="..\MessageDispatcher\MessageDispatcher.csproj" />
       <ProjectReference Include="..\Manager.Service\Manager.Service.csproj" />
       <ProjectReference Include="..\ExecutionPipeline\ExecutionPipeline.csproj" />
