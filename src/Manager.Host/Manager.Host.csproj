@@ -32,5 +32,5 @@
       <ProjectReference Include="..\Manager.Service\Manager.Service.csproj" />
       <ProjectReference Include="..\ExecutionPipeline\ExecutionPipeline.csproj" />
     </ItemGroup>
-
+    
 </Project>
