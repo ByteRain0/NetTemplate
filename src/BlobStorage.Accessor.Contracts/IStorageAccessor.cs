@@ -21,8 +21,3 @@ public interface IStorageAccessor
     
     Task<Response<List<string>>> ListItems(ListFilesQuery request, CancellationToken cancellationToken);
 }
-
-public interface IStorageValidator
-{
-    
-}

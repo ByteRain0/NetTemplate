@@ -3,6 +3,7 @@ using Hangfire;
 using Hangfire.PostgreSql;
 using History.Accessor.Host.Bootstrappers;
 using Manager.Host.Bootstrappers;
+using Manager.Service.Bootstrappers;
 using MessageDispatcher.Contracts;
 using MessageDispatcher.Infrastructure;
 using Microsoft.Extensions.Configuration;
@@ -39,7 +40,7 @@ public static class Program
                     
                 services.AddHangfire(configuration =>
                 {
-                    configuration.UsePostgreSqlStorage(serviceConfiguration["DatabaseConnectionString"]);
+                    configuration.UseSqlServerStorage(serviceConfiguration.GetConnectionString("DefaultConnection"));
                     configuration.UseMediatR();
                 });
                 services.AddHangfireServer();

@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using History.Accessor.Contracts;
-using History.Accessor.Contracts.Commands;
 using History.Accessor.Contracts.Commands.RecordEvent;
 using MediatR;
 

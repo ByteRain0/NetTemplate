@@ -1,0 +1,47 @@
+version: '3.4'
+services:
+  node-exporter:
+    image: prom/node-exporter:v1.1.2
+    restart: always
+    ports:
+      - '9100:9100'
+
+  redis:
+    image: redis:6.2.4
+    container_name: cache
+    ports:
+      - '6379:6379'
+    volumes:
+      - './config/redis.conf:/redis.conf'
+    command:
+      - redis-server
+      - /redis.conf
+    hostname: redis
+    networks:
+      app-tier:
+        aliases:
+          - redis
+        
+  seq:
+    container_name: seq
+    image: datalust/seq:2021.3.6651
+    environment:
+      ACCEPT_EULA: "Y"
+    ports:
+      - '5341:80'
+    volumes:
+      - ./seq-data:/data
+    restart: unless-stopped
+    hostname: seq
+    networks:
+      app-tier:
+        aliases:
+          - seq
+
+#  azuresqledge:
+#    container_name: azure_sql_db
+#    image: 
+
+networks:
+  app-tier:
+    driver: bridge

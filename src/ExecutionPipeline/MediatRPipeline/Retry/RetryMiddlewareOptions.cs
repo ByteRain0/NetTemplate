@@ -4,9 +4,9 @@ namespace ExecutionPipeline.MediatRPipeline.Retry;
 
 public class RetryMiddlewareOptions
 {
-    public int DefaultOperationRetryCount { get; set; } = 4;
+    public int DefaultOperationRetryCount { get; set; } = 2;
 
-    public int DefaultOperationIncrementalCount { get; set; } = 10;
+    public int DefaultOperationIncrementalCount { get; set; } = 5;
 
     public List<CustomActionRetryConfiguration> CustomConfiguration { get; set; }
 }

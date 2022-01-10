@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <RootNamespace>Manager.Host</RootNamespace>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -26,7 +27,7 @@
       <ProjectReference Include="..\History.Accessor.Contracts\History.Accessor.Contracts.csproj" />
       <ProjectReference Include="..\History.Accessor.Host\History.Accessor.Host.csproj" />
       <ProjectReference Include="..\Localization.Accessor.Host\Localization.Accessor.Host.csproj" />
-      <ProjectReference Include="..\Logger\Logger.csproj" />
+      <ProjectReference Include="..\LoggerInfrastructure\LoggerInfrastructure.csproj" />
       <ProjectReference Include="..\MessageDispatcher\MessageDispatcher.csproj" />
       <ProjectReference Include="..\Manager.Service\Manager.Service.csproj" />
       <ProjectReference Include="..\ExecutionPipeline\ExecutionPipeline.csproj" />

@@ -2,8 +2,9 @@ using BlobStorage.Accessor.Host.Bootstrappers;
 using ExecutionPipeline.Bootstrapper;
 using History.Accessor.Host.Bootstrappers;
 using Localization.Accessor.Infrastructure.Bootstrapper;
-using Logger.Bootstrapper;
+using LoggerInfrastructure.Bootstrapper;
 using Manager.Host.Bootstrappers;
+using Manager.Service.Bootstrappers;
 using MessageDispatcher.Host.Bootstrapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,7 +35,6 @@ public class Startup
         services.AddCustomLocalization(Configuration);
         services.AddManagerServices();
         services.AddSwagger();
-        services.AddAILogging(Configuration["ApplicationInsights:InstrumentationKey"]);
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

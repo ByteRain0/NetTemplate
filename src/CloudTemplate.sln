@@ -50,7 +50,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Localization.Accessor.Host"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Localization.Accessor.Service", "Localization.Accessor.Service\Localization.Accessor.Service.csproj", "{3E6F9988-61F9-4549-8BD5-59A72226FAB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{C9581297-EEBD-457F-9F42-9DFAF74F89FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerInfrastructure", "LoggerInfrastructure\LoggerInfrastructure.csproj", "{C9581297-EEBD-457F-9F42-9DFAF74F89FF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Engines", "2.Engines", "{5B013ABE-4DAA-49FE-A56A-FFF69818234E}"
 EndProject

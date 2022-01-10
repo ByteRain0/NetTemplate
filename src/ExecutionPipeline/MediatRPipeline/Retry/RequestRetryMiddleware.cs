@@ -3,7 +3,7 @@ using System.Collections;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ExecutionPipeline.MediatRPipeline.LoggingInfrastructure;
+using ExecutionPipeline.MediatRPipeline.Loggers;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -47,14 +47,14 @@ public class RequestRetryMiddleware<TRequest, TResponse> : IPipelineBehavior<TRe
             .WaitAndRetryAsync(retryCount: _config.DefaultOperationRetryCount, sleepDurationProvider: retryAttempt =>
                 {
                     var timeToWait = TimeSpan.FromSeconds(retryAttempt * _config.DefaultOperationIncrementalCount);
-                    _logger.LogTrace(
-                        "TemplateId : {TemplateId}. Request : '{RequestName}'. Payload : '{Payload}'. is being delayed by : '{Timeout}' seconds...",
+                    _logger.LogWarning(
+                        "TemplateId : {TemplateId}. Request : '{RequestName}'. Payload : '{RequestPayload}'. is being delayed by : '{Timeout}' seconds...",
                         StructuredLogsTemplates.RequestWasRetried, typeof(TRequest).Name, JsonConvert.SerializeObject(request),timeToWait.TotalSeconds);
                     return timeToWait;
                 },
                 onRetry: (exception, pollyRetryCount, context) =>
                 {
-                    if (exception != null)
+                    if (exception is not null)
                     {
                         _logger.LogError(exception, exception.Message);
                     }
