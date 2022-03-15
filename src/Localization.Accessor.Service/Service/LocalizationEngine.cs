@@ -94,7 +94,7 @@ public partial class LocalizationEngine : IStringLocalizer
 
                 if (fileLocalizations.IsFailure)
                 {
-                    throw new InvalidOperationException(fileLocalizations.StackTrace);
+                    throw new InvalidOperationException(fileLocalizations.Errors);
                 }
 
                 foreach (var fileLocalization in fileLocalizations.Value)
@@ -159,7 +159,7 @@ public partial class LocalizationEngine : IStringLocalizer
             }
             else if (cachedTranslation.IsFailure)
             {
-                _logger.LogCritical(message:$"Error encountered during fetch of cached lexeme for key :'{name}' , error : '{cachedTranslation.StackTrace}'");
+                _logger.LogCritical(message:$"Error encountered during fetch of cached lexeme for key :'{name}' , error : '{cachedTranslation.Errors}'");
             }
             return new LocalizedString(name, $"[{name}]", true);
         }

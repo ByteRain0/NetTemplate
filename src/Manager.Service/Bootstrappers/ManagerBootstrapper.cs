@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Manager.Service.Services.History.Commands.RecordEvent;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Voyager;
 

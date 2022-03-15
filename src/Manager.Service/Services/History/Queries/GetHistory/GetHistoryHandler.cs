@@ -28,7 +28,7 @@ internal class GetHistoryHandler : IRequestHandler<GetHistory, Response<History>
 
         if (history.IsFailure)
         {
-            return Response.Fail<History>($"Error fetching history. Error : '{history.StackTrace}'", history.ResponseCode);
+            return Response.Fail<History>($"Error fetching history. Error : '{history.Errors}'", history.ResponseCode);
         }
 
         return Response.Ok(new History()

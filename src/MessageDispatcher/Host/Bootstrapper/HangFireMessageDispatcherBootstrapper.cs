@@ -1,7 +1,7 @@
 using Hangfire;
-using Hangfire.PostgreSql;
 using MessageDispatcher.Contracts;
 using MessageDispatcher.Infrastructure;
+using MessageDispatcher.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +19,9 @@ public static class HangFireMessageDispatcherBootstrapper
             hangFireConfiguration.UseSqlServerStorage(configuration.GetConnectionString("DefaultConnection"));
             hangFireConfiguration.UseMediatR();
         });
+        services.AddTransient<IJobsAccessor, JobsAccessor>();
+        
+        services.AddHangfireServer();
         return services;
     }
 

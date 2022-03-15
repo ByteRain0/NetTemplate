@@ -38,10 +38,6 @@ services:
         aliases:
           - seq
 
-#  azuresqledge:
-#    container_name: azure_sql_db
-#    image: 
-
 networks:
   app-tier:
     driver: bridge

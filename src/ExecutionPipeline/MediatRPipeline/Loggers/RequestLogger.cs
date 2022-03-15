@@ -21,7 +21,7 @@ public class RequestLogger<TRequest, TResponse> : IPipelineBehavior<TRequest, TR
     {
         var name = typeof(TRequest).Name;
 
-        _logger.LogInformation("TemplateId : {TemplateId}. Executing request: '{RequestName}' with Payload : '{RequestPayload}'", 
+        _logger.LogInformation("TemplateId : {TemplateId}. Executing request: '{RequestName}' with Payload : '{@RequestPayload}'", 
             StructuredLogsTemplates.StartExecutionTemplate, name, JsonConvert.SerializeObject(request));
 
         var response = await next();

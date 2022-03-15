@@ -6,7 +6,7 @@ using Voyager.Api;
 
 namespace Manager.Service.Services.History.Queries.GetHistory;
 
-[VoyagerRoute(HttpMethod.Post,"api/GetHistory")]
+//[VoyagerRoute(HttpMethod.Post,"api/GetHistory")]
 public class GetHistory : IRequest<Response<History>>
 {
     public int Take { get; set; } = Int32.MaxValue;

@@ -15,7 +15,7 @@ public class Response
     public bool IsFailure => !IsSuccess;
         
     [JsonProperty] // Workaround the serializer.
-    public string StackTrace { get; private set; }
+    public string Errors { get; private set; }
 
     /// <summary>
     /// Set to string if there will be a need to define custom domain / interaction / data transfer specific response codes.
@@ -30,17 +30,17 @@ public class Response
     {
         //
     }
-    protected Response(bool isSuccess, string stackTrace, string code)
+    protected Response(bool isSuccess, string errors, string code)
     {
         this.IsSuccess = isSuccess;
-        this.StackTrace = stackTrace;
+        this.Errors = errors;
         this.ResponseCode = code;
     }
         
-    protected Response(bool isSuccess, string stackTrace, HttpStatusCode code)
+    protected Response(bool isSuccess, string errors, HttpStatusCode code)
     {
         this.IsSuccess = isSuccess;
-        this.StackTrace = stackTrace;
+        this.Errors = errors;
         this.ResponseCode = code.ToString();
     }
 
@@ -114,14 +114,14 @@ public class Response<T> : Response
         }
     }
 
-    protected internal Response(T value, bool isSuccess, string stackTrace, string code) 
-        : base(isSuccess, stackTrace, code)
+    protected internal Response(T value, bool isSuccess, string errors, string code) 
+        : base(isSuccess, errors, code)
     {
         _value = value;
     }
         
-    protected internal Response(T value, bool isSuccess, string stackTrace, HttpStatusCode code) 
-        : base(isSuccess, stackTrace, code)
+    protected internal Response(T value, bool isSuccess, string errors, HttpStatusCode code) 
+        : base(isSuccess, errors, code)
     {
         _value = value;
     }

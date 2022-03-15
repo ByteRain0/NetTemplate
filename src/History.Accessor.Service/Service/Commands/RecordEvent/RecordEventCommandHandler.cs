@@ -25,6 +25,8 @@ internal class RecordEventCommandHandler : IRequestHandler<RecordEventCommand, R
 
     public async Task<Response> Handle(RecordEventCommand model, CancellationToken cancellationToken)
     {
+        throw new InvalidOperationException("Some exception");
+        
         EventDataModel eventDataModel = new EventDataModel(
             message: model.Message,
             userId: model.UserId,

@@ -31,7 +31,7 @@ public class RequestPerformanceMiddleware<TRequest, TResponse> : IPipelineBehavi
         
         var name = typeof(TRequest).Name;
 
-        _logger.LogWarning("TemplateId : {TemplateId}. Long Running Request: RequestName : '{RequestName}' (Elapsed Time : '{ElapsedTime}' milliseconds). Payload : '{RequestPayload}'.", 
+        _logger.LogWarning("TemplateId : {TemplateId}. Long Running Request: RequestName : '{RequestName}' (Elapsed Time : '{ElapsedTime}' milliseconds). Payload : '{@RequestPayload}'.", 
             StructuredLogsTemplates.LongRunningRequestTemplate, name, _timer.ElapsedMilliseconds,  JsonConvert.SerializeObject(request));
 
         return response;

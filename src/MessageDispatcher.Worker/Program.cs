@@ -6,6 +6,7 @@ using Manager.Host.Bootstrappers;
 using Manager.Service.Bootstrappers;
 using MessageDispatcher.Contracts;
 using MessageDispatcher.Infrastructure;
+using MessageDispatcher.Service;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

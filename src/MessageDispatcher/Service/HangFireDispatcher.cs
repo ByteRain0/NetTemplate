@@ -1,12 +1,12 @@
 using System;
-using System.Threading.Tasks;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using Hangfire;
 using MediatR;
 using MessageDispatcher.Contracts;
+using MessageDispatcher.Infrastructure;
 using Microsoft.Extensions.Logging;
 
-namespace MessageDispatcher.Infrastructure;
+namespace MessageDispatcher.Service;
 
 public class HangFireDispatcher : IMessageDispatcher
 {

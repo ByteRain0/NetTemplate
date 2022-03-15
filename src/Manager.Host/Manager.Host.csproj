@@ -32,5 +32,9 @@
       <ProjectReference Include="..\Manager.Service\Manager.Service.csproj" />
       <ProjectReference Include="..\ExecutionPipeline\ExecutionPipeline.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="seq-data\Seq.json" />
+    </ItemGroup>
     
 </Project>

@@ -1,10 +1,9 @@
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using MediatR;
-using Voyager.Api;
 
 namespace Manager.Service.Services.History.Commands.RecordAsync;
 
-[VoyagerRoute(HttpMethod.Post,"api/recordEventAsync")]
+//[VoyagerRoute(HttpMethod.Post,"api/RecordEventAsync")]
 public class RecordAsync : IRequest<Response>
 {
     public string Message { get; set; }

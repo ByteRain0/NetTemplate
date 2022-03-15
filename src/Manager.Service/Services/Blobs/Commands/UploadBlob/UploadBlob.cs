@@ -6,7 +6,7 @@ using Voyager.Api;
 
 namespace Manager.Service.Services.Blobs.Commands.UploadBlob;
 
-[VoyagerRoute(HttpMethod.Post,"api/UploadBlob")]
+//s[VoyagerRoute(HttpMethod.Post,"api/UploadBlob")]
 public class UploadBlob : IRequest<Response>, IRetryMarker
 {
     public string Stream { get; set; }

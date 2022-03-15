@@ -16,13 +16,14 @@ public class Program
             .Build()
             .AddSerilog(); 
         
-        CreateHostBuilder(args).RunWithSerilogEnabled();
+        CreateHostBuilder(args)
+            .Build().Run();
     }
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(args)
             .ConfigureHostForKeyVault()
-            .UseSerilog()
+            //.UseSerilog()
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>();
