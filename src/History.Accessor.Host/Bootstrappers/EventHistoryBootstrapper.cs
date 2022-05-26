@@ -1,13 +1,11 @@
 using System.Collections.Generic;
 using System.Reflection;
-using AutoMapper;
+using ExecutionPipeline.Bootstrappers;
 using History.Accessor.Contracts;
-using History.Accessor.Contracts.Commands;
 using History.Accessor.Host.HealthChecks;
 using History.Accessor.Service.Infrastructure.DatabaseContext;
 using History.Accessor.Service.Service;
 using MediatR;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,9 +13,9 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace History.Accessor.Host.Bootstrappers;
 
-public static class EventHistoryBootstrapper
+public class EventHistoryBootstrapper : IBootstrapper
 {
-    public static void AddEventHistory(this IServiceCollection services, IConfiguration config)
+    public void BootstrapServices(IServiceCollection services, IConfiguration configuration)
     {
         services.AddTransient<IHistoryContext, HistoryContext>();
         services.AddTransient<IHistoryAccessor, HistoryAccessor>();
@@ -35,7 +33,7 @@ public static class EventHistoryBootstrapper
         });
             
         services.AddDbContext<HistoryContext>(
-            opts => opts.UseSqlServer(config.GetConnectionString("DefaultConnection"))
+            opts => opts.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
         );
             
         var hcBuilder = services.AddHealthChecks();
@@ -44,16 +42,5 @@ public static class EventHistoryBootstrapper
             "history_accessor_health_check",
             failureStatus: HealthStatus.Degraded,
             tags: new[] { "HistoryAccessor" });
-    }
-
-    public static void ApplyEventHistoryMigrations(this IApplicationBuilder app)
-    {
-        using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-        {
-            using (var context = serviceScope.ServiceProvider.GetService<HistoryContext>())
-            {
-                context?.Database.Migrate();
-            }
-        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Globalization;
 using AutoMapper;
 using ExecutionPipeline.Bootstrapper;
+using ExecutionPipeline.Bootstrappers;
 using History.Accessor.Host.Bootstrappers;
 using History.Accessor.Service.Infrastructure.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
@@ -36,8 +37,7 @@ public class TestBase
         var services = new ServiceCollection();
         var configuration = InitConfiguration();
 
-        services.AddEventHistory(configuration);
-        services.AddExecutionPipeline();
+        //services.RunBootstrapping(typeof(TestBase).Assembly,configuration);
             
         var serviceProvider = services
             .AddEntityFrameworkInMemoryDatabase()

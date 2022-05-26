@@ -6,6 +6,7 @@ using Azure.Storage.Blobs;
 using BlobStorage.Accessor.Contracts;
 using BlobStorage.Accessor.Host.Bootstrappers;
 using BlobStorage.Accessor.Service.Infrastructure;
+using ExecutionPipeline.Bootstrappers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -40,7 +41,7 @@ public class TestBase
             .BuildServiceProvider();
 
         services.Configure<BlobStorageTestConfigurations>(configuration.GetSection("BlobStorageTestConfigurations"));
-        services.AddBlobStorage(configuration);
+        //services.RunBootstrapping(typeof(TestBase).Assembly,configuration);
             
         return services
             .AddLogging()

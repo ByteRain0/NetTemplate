@@ -27,7 +27,7 @@ public class LogAtAllLevels : IRequest<Response>
             
             _logger.LogInformation("General messages");
             
-            _logger.LogWarning("Unexpected events");
+            _logger.LogWarning("Negative events that can be gracefully handled by application code");
             
             _logger.LogError("For exceptions and errors");
             

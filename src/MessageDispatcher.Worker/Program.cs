@@ -1,4 +1,5 @@
 ﻿using ExecutionPipeline.Bootstrapper;
+using ExecutionPipeline.Bootstrappers;
 using Hangfire;
 using Hangfire.PostgreSql;
 using History.Accessor.Host.Bootstrappers;
@@ -32,13 +33,9 @@ public static class Program
             .ConfigureServices(services =>
             {
                 var serviceConfiguration = services.BuildServiceProvider().GetService<IConfiguration>();
-                    
-                services.AddManagerServices();
-                services.AddExecutionPipeline();
-                services.AddEventHistory(serviceConfiguration);
-                services.AddSessionAccessors();
+
+                //services.RunBootstrapping(typeof(Program).Assembly,serviceConfiguration);
                 services.AddTransient<IMessageDispatcher, HangFireDispatcher>();
-                    
                 services.AddHangfire(configuration =>
                 {
                     configuration.UseSqlServerStorage(serviceConfiguration.GetConnectionString("DefaultConnection"));

@@ -1,15 +1,17 @@
+using ExecutionPipeline.Bootstrappers;
 using ExecutionPipeline.MediatRPipeline.ExceptionHandling;
 using ExecutionPipeline.MediatRPipeline.Loggers;
 using ExecutionPipeline.MediatRPipeline.Retry;
 using ExecutionPipeline.MediatRPipeline.Validator;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ExecutionPipeline.Bootstrapper;
 
-public static class MediatrPipelineBootstrapper
+public class MediatrPipelineBootstrapper : IBootstrapper
 {
-    public static void AddExecutionPipeline(this IServiceCollection services)
+    public void BootstrapServices(IServiceCollection services, IConfiguration configuration)
     {
         services.AddMediatR(typeof(MediatrPipelineBootstrapper));
         //Log method call

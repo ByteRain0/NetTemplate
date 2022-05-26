@@ -1,3 +1,4 @@
+using ExecutionPipeline.Bootstrappers;
 using Localization.Accessor.Contracts.Contracts;
 using Localization.Accessor.Service.Accessors.CacheAccessor.Host;
 using Localization.Accessor.Service.Accessors.FileAccessor.Host;
@@ -10,20 +11,22 @@ using Microsoft.Extensions.Localization;
 
 namespace Localization.Accessor.Infrastructure.Bootstrapper;
 
-public static class LocalizationBootstrapper
+public class LocalizationBootstrapper : IBootstrapper
 {
-    public static void AddCustomLocalization(this IServiceCollection services, IConfiguration config)
+    public void BootstrapServices(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDistributedLocalizationResourceAccessor(config);
-        services.AddFileLocalization(config);
+        services.AddDistributedLocalizationResourceAccessor(configuration);
+        services.AddFileLocalization(configuration);
 
         services.AddTransient<IStringLocalizer, LocalizationEngine>();
         services.AddTransient<ILocalizationConfigurationsAccessor, LocalizationEngine>();
             
-        services.Configure<LocalizationStoreInformation>(config.GetSection("LocalizationConfig"));
-
+        services.Configure<LocalizationStoreInformation>(configuration.GetSection("LocalizationConfig"));
     }
+}
 
+public static class LocalizationMiddleware
+{   
     public static void UseLocalization(this IApplicationBuilder app)
     {
         app.UseSession();
